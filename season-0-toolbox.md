@@ -76,7 +76,7 @@ The paid books (*Designing Data-Intensive Applications*, Alex Xu's *System Desig
 - **Day 2, Exercises:** Setup, plus the first half of the exercises.
 - **Day 3, Exercises:** the rest of the exercises, plus *Break it*.
 - **Day 4, Measure and go deeper:** *Measure it*, plus the mini-project if there's one. For L3 tools, answer "why?" twice for each *Must know* item. Write answers to the questions viewers are likely to ask.
-- **Day 5, Script:** plan the whiteboard panels and the demo steps. Write the hook word for word and keep the rest as bullet points. Do one dry run.
+- **Day 5, Script:** turn the bullet points you wrote for each *Video breakdown* row into whiteboard panels (roughly one panel per row), then plan the demo steps. Write the hook word for word and keep the rest as bullet points. Do one dry run.
 - **Day 6, Record:** record the demo separately from the whiteboard explanation.
 
 L2 tools often fit in 4-5 days. L3 tools may need a 7th day. That's fine.
@@ -91,7 +91,21 @@ L2 tools often fit in 4-5 days. L3 tools may need a 7th day. That's fine.
 6. **Your numbers (30 s):** what you measured.
 7. **When to use it, and when not to (1 min).**
 
-Aim for 10-15 minutes.
+Aim for 10-15 minutes. Part 3 is split into sub-parts (3a, 3b, …), one per concept, at about 1-2 minutes each.
+
+### How to use each tool's Video breakdown
+
+Every tool has a **Video breakdown** table just before its video idea. Each row is one part of the video:
+- **What you cover:** what that part says or shows.
+- **Learn from:** the numbered steps of that tool's *Study path* that teach it ("Study 2, 5" means steps 2 and 5).
+- **Practise with:** the matching exercise in that tool's *Practice* section ("Ex 3", "Break it", "Measure it", "Mini-project").
+
+Work through it **part by part, not resource by resource**:
+1. Pick a row. Do its *Learn from* steps, then its *Practise with* exercise.
+2. Straight away, write 3-5 bullet points for that part of the script, plus one sentence on what you'll draw or show.
+3. Tick the row and move to the next.
+
+When every row is ticked, your script outline is already written, and every part of it is backed by something you've read *and* done. Rows with "—" in *Learn from* come from your own practice (demos and numbers). Rows with "—" in *Practise with* are explanation-only, so rehearse them out loud.
 
 ---
 
@@ -176,6 +190,21 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** use `curl -w` with `time_namelookup`, `time_connect`, `time_appconnect` and `time_starttransfer` against servers in three regions (for example Singapore, Europe, the US). Make a small table. That's your latency slide.
 - **Ready to record when:** you can draw the whole path from typing a URL to seeing the page, and say roughly how many milliseconds each step costs.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | You tap a link and a page appears ~300 ms later. What happened in those milliseconds? | Study 1 | Measure it (your numbers make the hook) |
+| 2 · Mental model | A request is a chain of round trips: DNS → TCP → TLS → HTTP → response. | Study 1 | Ex 4 (the waterfall *is* the picture) |
+| 3a · DNS | Resolvers, A/CNAME records, TTL, caching, why DNS changes are slow. | Study 5, 6 | Ex 1 |
+| 3b · TCP | The three-way handshake; why connections are reused (keep-alive). | Study 2 | Ex 4 |
+| 3c · TLS | The handshake, certificates, the chain of trust, the extra round trips. | Study 3 | Ex 2 |
+| 3d · HTTP | Request and response as plain text: methods, status codes, key headers. | Study 4 | Ex 3 |
+| 4 · Live demo | `dig +trace` → raw HTTP with `nc` → `curl -v`. | — | Ex 1-3 |
+| 5 · Break it | Wrong IP in `/etc/hosts`; a certificate error from the wrong hostname. | Study 3 (chain of trust) | Break it |
+| 6 · Your numbers | Your DNS / connect / TLS / first-byte table for 3 regions. | Study 1 | Measure it |
+| 7 · When it matters | Why CDNs, connection reuse and HTTP/2 exist: they cut round trips. | Study 1, 2 | — |
+
 **Video idea:** *What actually happens in the 300 ms after you tap a link*
 
 ### T2 · Web server and reverse proxy (Nginx), depth L2
@@ -204,6 +233,21 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** stop the app container and request `/api/`: read the 502 and the matching error-log line. Call `GET /slow` with `proxy_read_timeout 1s` to get a 504. Knowing the difference between 502 and 504 is a classic viewer question.
 - **Measure it:** load-test a static file served by Nginx vs the same file served by the lab app, using k6. Report requests per second.
 - **Ready to record when:** you can write a basic reverse-proxy config from memory and explain 502 vs 504.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | An app server handling slow clients, TLS and images by itself wastes its capacity. | Study 3 | — |
+| 2 · Mental model | Nginx is the front desk: it handles the door and passes real work to the app. | Study 1 | — |
+| 3a · Config structure | `http` / `server` / `location` blocks, and how Nginx picks the block for a request. | Study 1, 4 | Ex 1 |
+| 3b · Static files | Serving files directly without touching the app. | Study 2 | Ex 1 |
+| 3c · Reverse proxy | `proxy_pass`, forwarding headers (`X-Forwarded-For`), timeouts. | Study 3, 5 | Ex 2 |
+| 3d · TLS, gzip, limits | TLS termination, compression, `client_max_body_size`. | Study 3, 5 | Ex 3-5 |
+| 4 · Live demo | Static file → proxied API → HTTPS, all in one config. | — | Ex 1-3 |
+| 5 · Break it | 502 (app down) vs 504 (app too slow): what each one means. | Study 5 (timeouts) | Break it |
+| 6 · Your numbers | Requests per second for a static file: Nginx vs the app. | — | Measure it |
+| 7 · When not to use it | When a managed load balancer or CDN already does the job; alternatives (Caddy, Traefik, HAProxy) at L1. | Study 3 | — |
 
 **Video idea:** *Why almost every website has Nginx in front of it*
 
@@ -234,6 +278,21 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** kill one server in the middle of a k6 test. Count the failed requests, then tune the health checks or retries until the count is near zero.
 - **Measure it:** requests per second with 1, 2 and 3 servers. Is it linear? Usually not, and the "why not" (the database or the load balancer becomes the limit) is a great video moment.
 - **Ready to record when:** you can explain why sticky sessions are a crutch and what a stateless server needs instead.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | One server hits its limit, or dies, and the whole site goes down. | Study 1 | — |
+| 2 · Mental model | A traffic officer spreading cars across lanes, and closing a lane that's blocked. | Study 1 | — |
+| 3a · Algorithms | Round robin, least connections, weighted, hashing. | Study 1, 2 | Ex 1-2 |
+| 3b · Health checks | Passive vs active checks; what a good health check tests. | Study 3, 4 | Ex 3 |
+| 3c · Stateless servers | Why state inside a server breaks balancing; sticky sessions as a crutch. | Study 1, 2 | Ex 4 |
+| 3d · L4 vs L7, and the LB as SPOF | What each layer sees; pairs, floating IPs, managed load balancers. | Study 2, 3 | — |
+| 4 · Live demo | Responses rotating across 3 servers, then the in-memory counter giving 3 different answers. | — | Ex 1, 4 |
+| 5 · Break it | Kill a server mid-load-test and count the failed requests. | Study 3 | Break it |
+| 6 · Your numbers | Requests per second with 1, 2, 3 servers, and why it isn't linear. | — | Measure it |
+| 7 · When to use it | When one bigger server is simpler; DNS round robin; managed load balancers. | Study 1, 3 | — |
 
 **Video idea:** *A server died and nobody noticed: load balancers explained*
 
@@ -280,6 +339,24 @@ Ordered so that each tool only needs the ones before it.
 - **Mini-project:** take 5 slow queries, fix each one with the right index, and justify every choice.
 - **Ready to record when:** you can draw a B-tree, show how a lookup walks it, and predict from a query whether an index will be used.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | A simple query on 5 million rows takes seconds. | — | Ex 1-2 |
+| 2 · Mental model | The index at the back of a book: sorted, so you can skip straight to the page. | Study 1 | — |
+| 3a · How a B-tree works | Leaf nodes, the tree above them, and how a lookup walks down it. | Study 1, 8 | — |
+| 3b · Reading EXPLAIN | Sequential scan vs index scan; reading cost, rows and time. | Study 7 | Ex 2 |
+| 3c · Composite indexes | Why column order matters. | Study 2, 6 | Ex 3 |
+| 3d · LIKE | Why `'abc%'` can use an index and `'%abc%'` can't. | Study 2 (LIKE filters) | Ex 4 |
+| 3e · Covering indexes | Index-only scans: answering from the index alone. | Study 4, 6 | Ex 5 |
+| 3f · The cost of indexes | Slower writes and extra disk space. | Study 5 | Measure it |
+| 3g · Beyond indexes | N+1 queries and connection pooling. | Study 3, 9 | Ex 6, Break it |
+| 4 · Live demo | The same query before and after an index, with both plans side by side. | — | Ex 2-3 |
+| 5 · Break it | Hit `max_connections`, then fix it with PgBouncer. | Study 9 | Break it |
+| 6 · Your numbers | Query time before/after; index size vs table size; insert slowdown. | — | Measure it |
+| 7 · When not to index | Tiny tables, columns with few distinct values, write-heavy tables. | Study 3, 5 | Mini-project |
+
 **Video idea:** *Why your query takes 8 seconds, and how one index makes it 2 ms*
 
 ### T5 · Transactions, isolation and locking, depth L3
@@ -316,6 +393,23 @@ Ordered so that each tool only needs the ones before it.
 - **Mini-project:** a tiny "ticket booking" endpoint in the lab app that never oversells under k6 load.
 - **Ready to record when:** you can show a race on two terminals from memory, and say which fix you'd pick for which situation.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Two buyers, one ticket left, both succeed. | — | Ex 1 |
+| 2 · Mental model | A transaction is a bubble; the isolation level is how thin its walls are. | Study 1, 5 (#16) | — |
+| 3a · ACID in practice | What each letter actually promises you. | Study 5 (#16) | — |
+| 3b · Race conditions | Check-then-act and the lost update. | Study 2, 4 | Ex 1 |
+| 3c · Isolation levels | Read committed, repeatable read, serializable, and the anomalies each allows (including write skew). | Study 2, 4 | Ex 5-6 |
+| 3d · MVCC | Why readers don't block writers. | Study 1, 5 (#19) | — |
+| 3e · Three fixes | `FOR UPDATE`, an atomic conditional `UPDATE`, optimistic locking. | Study 3 | Ex 2-4 |
+| 3f · Deadlocks | How they form and how Postgres breaks them. | Study 3 (Deadlocks) | Break it |
+| 4 · Live demo | Two `psql` windows side by side: the race, then the `FOR UPDATE` fix. | — | Ex 1-2 |
+| 5 · Break it | A deliberate deadlock and Postgres's report. | Study 3 | Break it |
+| 6 · Your numbers | 100 concurrent purchases: oversells with no fix, and throughput of each fix. | — | Measure it |
+| 7 · Which fix when | Atomic update for counters, `FOR UPDATE` for multi-step logic, optimistic for low contention, `SERIALIZABLE` with retries. | Study 2, 3 | Mini-project |
+
 **Video idea:** *How two people bought the last ticket at the same second*
 
 ### T6 · Backups and recovery, depth L2
@@ -346,6 +440,22 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** corrupt a backup file (truncate it) and try to restore it. That's why you test restores.
 - **Measure it:** backup and restore times for the table. That restore time *is* your RTO, a strong on-camera moment.
 - **Ready to record when:** you can explain RPO vs RTO with your own measured numbers.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Someone runs `DELETE` without `WHERE`; the GitLab story. | Study 3 | — |
+| 2 · Mental model | A snapshot plus a diary of every change (WAL): replay to any minute. | Study 2 | — |
+| 3a · Logical vs physical | `pg_dump` vs `pg_basebackup`, and when to use each. | Study 1 | Ex 1-2 |
+| 3b · WAL and PITR | Recovering to the minute before a mistake. | Study 2 | Ex 3 |
+| 3c · 3-2-1 and off-site | Three copies, two media, one off-site. | Study 4 | Ex 4 |
+| 3d · RPO and RTO | How much data you can lose, and how long recovery takes. | Study 4 | Measure it |
+| 3e · Testing restores | Why untested backups fail; why a replica isn't a backup. | Study 3, 4 | Ex 5 |
+| 4 · Live demo | A PITR to one minute before a deliberate `DELETE`. | — | Ex 3 |
+| 5 · Break it | Restoring a corrupted backup file. | Study 3 | Break it |
+| 6 · Your numbers | Your backup and restore times: your real RTO. | — | Measure it |
+| 7 · Which approach when | `pg_dump` for small databases, physical + WAL for bigger ones, managed database backups. | Study 1, 2 | — |
 
 **Video idea:** *Your backups probably don't work. Here's how GitLab found out*
 
@@ -393,6 +503,22 @@ Ordered so that each tool only needs the ones before it.
 - **Mini-project:** a leaderboard API in the lab app with top-10 and "my rank".
 - **Ready to record when:** you can explain why single-threaded makes Redis *faster* and atomic, and what persistence mode you'd pick for a cache vs a lock store.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Counters, sessions and leaderboards at thousands of operations a second are too much for the database. | — | — |
+| 2 · Mental model | One huge in-memory dictionary run by a single worker who does one command at a time. | Study 1 | — |
+| 3a · Why it's fast and atomic | Memory plus a single thread; time complexity per command; pipelining. | Study 4, 7 | Break it (`KEYS *`) |
+| 3b · Data types | Strings, lists, sets, hashes, sorted sets, geo, and what each is for. | Study 1 | Ex 1, 3, 4, 5, 7 |
+| 3c · Atomic multi-step logic | `MULTI`/`EXEC` and Lua scripts. | Study 2, 3 | Ex 2, 6 |
+| 3d · Persistence | RDB vs AOF, and what you lose in a crash. | Study 5 | Break it (kill) |
+| 3e · Memory and eviction | `maxmemory` and eviction policies. | Study 6 | Break it (`maxmemory`) |
+| 4 · Live demo | `MONITOR` in one window; build a leaderboard and a lock in the other. | — | Ex 2-3 |
+| 5 · Break it | `KEYS *` on a million keys freezing every client. | Study 7 | Break it |
+| 6 · Your numbers | `redis-benchmark` ops/sec, latency, memory per million keys. | — | Measure it |
+| 7 · When not to use it | As the only copy of data you can't lose; datasets bigger than RAM; complex queries. | Study 5, 6 | Mini-project |
+
 **Video idea:** *Redis: the Swiss Army knife behind every fast app*
 
 ### T8 · Caching patterns and CDN, depth L3 (patterns) / L2 (CDN)
@@ -424,6 +550,22 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** make one hot key expire while 500 requests per second hit it, and watch the database spike in `pg_stat_activity`. That's a stampede. Fix it with a lock or single-flight, then add jittered TTLs.
 - **Measure it:** database queries per second at a 0%, 90% and 99% hit ratio.
 - **Ready to record when:** you can show a stampede happening and explain two fixes.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | The same slow query runs a thousand times a second. | — | — |
+| 2 · Mental model | A notepad on your desk: check it before walking to the archive. | Study 2 | — |
+| 3a · Patterns | Cache-aside, read-through, write-through, write-behind. | Study 1, 2 | Ex 1 |
+| 3b · TTL and invalidation | Stale data and how to remove it on write. | Study 1, 2 | Ex 2 |
+| 3c · Hit-ratio maths | What 90% vs 99% means for the database. | Study 1 | Ex 3 |
+| 3d · Stampede | The thundering herd, and its fixes: locking, jitter, stale-while-revalidate. | Study 1 (+ "still unclear" link) | Break it |
+| 3e · HTTP caching and CDN | `Cache-Control`, `ETag`, edge vs origin, purge. | Study 3, 4 | Ex 4-5 |
+| 4 · Live demo | Latency with and without cache; then `cf-cache-status` going MISS → HIT. | — | Ex 1, 5 |
+| 5 · Break it | A hot key expires under load and the database spikes. | Study 1 | Break it |
+| 6 · Your numbers | Database queries per second at 0%, 90% and 99% hit ratio. | — | Measure it |
+| 7 · What not to cache | Stock at checkout, fast-changing or personal data; measure before you cache. | Study 1 | — |
 
 **Video idea:** *The cache that took down the database*
 
@@ -461,6 +603,22 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** bcrypt hashing time at cost 10 vs 12 (why it's slow on purpose); JWT size vs session-ID cookie size.
 - **Ready to record when:** you can argue both sides of "sessions vs JWT" and pick one with reasons.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | HTTP forgets you between requests; add a second server and users get logged out. | — | Ex 1 |
+| 2 · Mental model | A cloakroom ticket (session ID) vs a signed passport (JWT). | Study 1, 8 | — |
+| 3a · Cookies | `HttpOnly`, `Secure`, `SameSite`, expiry. | Study 6, 7 | Ex 5 |
+| 3b · Server-side sessions | Session IDs, and where sessions live with many servers. | Study 1, 2 | Ex 1-2 |
+| 3c · JWT | What's inside, and the revocation trade-off. | Study 8, 1 | Ex 3 |
+| 3d · Passwords | Why hashing is slow on purpose. | Study 3 | Measure it (bcrypt) |
+| 3e · OTP | Generate, store hashed, expire, limit attempts. | Study 4, 5 | Ex 4 |
+| 4 · Live demo | Random logouts with 2 servers, fixed by moving sessions to Redis. | — | Ex 1-2 |
+| 5 · Break it | A stolen cookie works in another browser; brute-forcing an OTP without limits. | Study 7 | Break it |
+| 6 · Your numbers | bcrypt cost 10 vs 12; JWT vs session-cookie size. | — | Measure it |
+| 7 · Which to choose | Sessions vs JWT with reasons; use a proven library rather than writing your own. | Study 1, 8 | — |
+
 **Video idea:** *How a website remembers that you're logged in*
 
 ### T10 · Object storage and file uploads, depth L2
@@ -491,6 +649,21 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** upload a 1 GB file *through* the lab app instead and watch its memory and the timeouts. Cut the network halfway through a normal upload (`docker network disconnect`) and try to resume.
 - **Measure it:** upload time through the app vs a presigned direct upload; resume time vs starting from scratch.
 - **Ready to record when:** you can explain why presigned uploads take load off your servers, and how resumable uploads work in chunks.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Uploads saved on one server's disk: other servers can't see them, and big uploads time out. | Study 1 | — |
+| 2 · Mental model | A huge valet locker: you hand over whole objects and get them back by key. | Study 1 | — |
+| 3a · File system vs object storage | Buckets, keys, objects you replace rather than edit, durability. | Study 1 | Ex 1 |
+| 3b · Presigned URLs | Letting the client upload straight to storage. | Study 2 | Ex 2 |
+| 3c · Multipart and resumable uploads | Chunks, parallel parts, resuming after a failure. | Study 3, 4 | Ex 3-4 |
+| 3d · After the upload | A processing pipeline (thumbnails) and a CDN in front. | Study 1 | Ex 5 |
+| 4 · Live demo | A presigned upload, then a resumed interrupted upload. | Study 5 (setup) | Ex 2, 4 |
+| 5 · Break it | A 1 GB upload through the app's memory; a dropped network mid-upload. | Study 3 | Break it |
+| 6 · Your numbers | Through the app vs direct upload; resume vs restart. | — | Measure it |
+| 7 · When not to use it | Tiny files, or apps that truly need file-system behaviour. | Study 1 | — |
 
 **Video idea:** *Why you should never upload files to your own server*
 
@@ -528,6 +701,23 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** update a row in Postgres and search immediately: it isn't there yet (refresh interval, sync lag). Search with a typo and no fuzziness.
 - **Measure it:** the same query with `LIKE '%x%'`, Postgres full-text search and OpenSearch, on 100,000 rows and on 1 million.
 - **Ready to record when:** you can draw an inverted index and explain why it's fast, and when Postgres full-text search is enough.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | `LIKE '%x%'` on millions of rows: slow, no ranking, no typo tolerance. | — | Measure it |
+| 2 · Mental model | The index at the back of a book: word → list of pages. | Study 1 | — |
+| 3a · Inverted index | Building it and answering queries with it. | Study 1 | Ex 1 |
+| 3b · Text analysis | Tokenising, lowercasing, stemming, synonyms. | Study 2, 5 | Ex 3 |
+| 3c · Relevance | tf-idf, and BM25 at headline level. | Study 3, 6 | Ex 2 |
+| 3d · Filters, facets, fuzzy | Narrowing results and tolerating typos. | Study 6 | Ex 4 |
+| 3e · Autocomplete | Edge n-grams. | Study 7 | Ex 5 |
+| 3f · Keeping it in sync | Dual writes vs CDC; search is slightly behind the database. | Study 4 | Break it |
+| 4 · Live demo | Your 40-line inverted index, then the same search in OpenSearch. | — | Ex 1-3 |
+| 5 · Break it | A just-updated row that search can't find yet; a typo with no fuzziness. | Study 6 | Break it |
+| 6 · Your numbers | `LIKE` vs Postgres full-text vs OpenSearch at 100K and 1M rows. | — | Measure it |
+| 7 · When Postgres is enough | Postgres full-text search for small and medium needs. | Study 8 | Ex 6 |
 
 **Video idea:** *How search finds what you meant among millions of items in 20 ms*
 
@@ -568,6 +758,23 @@ Ordered so that each tool only needs the ones before it.
 - **Mini-project:** move the T10 thumbnail worker onto RabbitMQ with retries and a DLQ.
 - **Ready to record when:** you can explain at-least-once delivery and show a redelivery live.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Users wait for slow work, and traffic peaks overwhelm the workers. | Study 1 | — |
+| 2 · Mental model | Order tickets on a kitchen rail: cooks take the next one when they're free. | Study 1 | — |
+| 3a · Producers and consumers | Why async smooths peaks and decouples services. | Study 1 (tutorials 1-2) | Ex 1 |
+| 3b · Acks and redelivery | At-most-once vs at-least-once; why "exactly once" needs idempotency. | Study 2, 5 | Ex 2 |
+| 3c · Fair dispatch | Prefetch and how work spreads. | Study 3 | Ex 3 |
+| 3d · Pub/sub with exchanges | One message to many queues. | Study 1 (tutorials 3-5) | Ex 4 |
+| 3e · Retries and dead letters | Backoff, DLQs, poison messages. | Study 4 | Ex 5 |
+| 3f · Priority and backpressure | Urgent work first; what happens when consumers fall behind. | Study 1 | Ex 6 |
+| 4 · Live demo | The management UI while you kill a consumer mid-message and watch redelivery. | — | Ex 2 |
+| 5 · Break it | A poison message looping forever, fixed with a DLQ. | Study 4 | Break it |
+| 6 · Your numbers | Throughput with 1, 3, 10 consumers; drain time for 100K messages. | — | Measure it |
+| 7 · When not to use it | When the user needs the answer now; when you need replay (that's T13). | Study 1 | Mini-project |
+
 **Video idea:** *Why big apps make your request wait in line*
 
 ### T13 · Event logs and pub/sub (Kafka), depth L2
@@ -600,6 +807,22 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** messages per second for one producer on your laptop; consumer lag while a consumer is paused.
 - **Ready to record when:** you can say exactly when you'd pick Kafka over RabbitMQ, and the other way round.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Several systems need the same events, but a queue deletes each message once it's handled. | Study 3 | — |
+| 2 · Mental model | An append-only notebook where every reader keeps their own bookmark. | Study 3 | — |
+| 3a · Log vs queue | Retention and replay. | Study 1, 3 | — |
+| 3b · Topics, partitions, keys | Ordering within a partition. | Study 1, 2 | Ex 1 |
+| 3c · Consumer groups and offsets | Sharing work, and independent readers. | Study 2, 4 | Ex 2-4 |
+| 3d · Delivery semantics | At-least-once, retention, committing offsets. | Study 4 | — |
+| 3e · Other pub/sub options | Redis pub/sub (fire-and-forget) vs a durable log. | — | Ex 5 |
+| 4 · Live demo | Two consumer groups reading the same topic, then a replay from offset 0. | — | Ex 3-4 |
+| 5 · Break it | A rebalance when a consumer dies; lost ordering without keys. | Study 2 | Break it |
+| 6 · Your numbers | Messages/sec on your laptop; lag while a consumer is paused. | — | Measure it |
+| 7 · When not to use it | Small apps and simple task queues (use RabbitMQ, T12). | Study 1 | — |
+
 **Video idea:** *Kafka vs RabbitMQ: do you need a queue or a log?*
 
 ### T14 · Background jobs, cron and distributed locks, depth L2
@@ -627,6 +850,22 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** `docker pause` the leaseholder past its TTL. Another container takes the lease, then you unpause the first: now both run. Fix it with a fencing token checked in the database.
 - **Measure it:** how late the delayed jobs run (actual vs scheduled time) at different polling intervals.
 - **Ready to record when:** you can show the pause-and-resume double run and explain fencing tokens.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | A report gets generated three times because three servers run the same cron. | — | Ex 1 |
+| 2 · Mental model | A talking stick with a timer: only the holder may speak, until time runs out. | Study 2 | — |
+| 3a · Cron and workers | Cron syntax and its limits. | Study 3 | Ex 1 |
+| 3b · Leases | A lock with a TTL in Redis. | Study 2 | Ex 2 |
+| 3c · Why locks fail | Process pauses and clocks; fencing tokens. | Study 1 | Break it |
+| 3d · Delayed jobs | Sorted sets; `SKIP LOCKED` job queues in Postgres. | Study 4 | Ex 3 |
+| 3e · Idempotent jobs | Making a double run harmless. | — | Ex 4 |
+| 4 · Live demo | Three runs, fixed with a lease. | — | Ex 1-2 |
+| 5 · Break it | Pause the lease holder past its TTL so both run; fix it with a fencing token. | Study 1 | Break it |
+| 6 · Your numbers | How late delayed jobs run at different polling intervals. | — | Measure it |
+| 7 · When to use a real scheduler | When a dedicated job system or managed scheduler is worth it (L1). | Study 1 | — |
 
 **Video idea:** *The cron job that ran three times*
 
@@ -663,6 +902,23 @@ Ordered so that each tool only needs the ones before it.
 - **Mini-project:** a nightly reconciliation script that compares your database with the gateway's transaction list and flags mismatches.
 - **Ready to record when:** you can explain the "did it go through?" problem and walk through your idempotency table row by row.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | A timeout, a retry, and the customer is charged twice. | Study 1 | — |
+| 2 · Mental model | A receipt number on every request: the cashier checks it before charging again. | Study 1 | — |
+| 3a · How a payment flow works | Create → redirect → pay → callback/webhook → verify. | Study 5, 4 | Ex 1 |
+| 3b · "Did it go through?" | Why a timeout tells you nothing about the outcome. | Study 1 | — |
+| 3c · Idempotency keys | Store, lock, replay the saved response, expiry. | Study 1, 2, 3 | Ex 3-4 |
+| 3d · State machine | Legal and illegal payment transitions. | Study 2 | Ex 5 |
+| 3e · Webhooks | Signatures, duplicates, out-of-order delivery. | Study 4 | Ex 2 |
+| 3f · Reconciliation | Comparing your records with the gateway's. | Study 2 | Mini-project |
+| 4 · Live demo | The same request sent twice at once: one charge, the same response. | — | Ex 4 |
+| 5 · Break it | Retry without a key → a double charge in the sandbox dashboard; replayed webhooks. | Study 4 | Break it |
+| 6 · Your numbers | Duplicates from 100 retried requests, with and without keys. | — | Measure it |
+| 7 · Beyond payments | Anywhere a retry could repeat a side effect (emails, orders, SMS). | Study 1 | — |
+
 **Video idea:** *Why you got charged twice, and how payment systems prevent it*
 
 ---
@@ -697,6 +953,21 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** lag under a heavy write load; write latency with async vs sync replication.
 - **Ready to record when:** you can explain sync vs async in terms of what each one risks losing.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | "I just saved it, why isn't it there?" Or: the only database machine dies. | Study 1 | — |
+| 2 · Mental model | The primary writes in a diary; replicas copy each page a moment later. | Study 1 | — |
+| 3a · Primary and replicas | Read scaling; replicas refuse writes. | Study 1, 2 | Ex 1-2 |
+| 3b · Sync vs async | What each one risks losing, and what it costs. | Study 3 | Ex 5 |
+| 3c · Lag anomalies | Read-your-writes and monotonic reads, and how to fix them. | Study 1 | Ex 3-4 |
+| 3d · Failover and split brain | Promoting a replica; two primaries. | Study 3, 4 | Break it |
+| 4 · Live demo | A delayed replica that "loses" the row you just wrote. | — | Ex 3 |
+| 5 · Break it | Manual promotion, then the old primary comes back: split brain. | Study 4 | Break it |
+| 6 · Your numbers | Lag under load; write latency async vs sync. | — | Measure it |
+| 7 · When to use it | When replicas help; why a replica isn't a backup (callback to T6). | Study 2 | — |
+
 **Video idea:** *"I just saved it, why isn't it there?" Replication lag explained*
 
 ### T17 · Sharding and consistent hashing, depth L3
@@ -729,6 +1000,22 @@ Ordered so that each tool only needs the ones before it.
 - **Optional:** the Citus extension for real distributed Postgres.
 - **Ready to record when:** you can explain consistent hashing on a whiteboard and argue for a shard key.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | One machine can't hold all the data or handle all the writes. | Study 4 | — |
+| 2 · Mental model | Splitting one phone book into volumes A-M and N-Z. | Study 1 | — |
+| 3a · Partitioning vs sharding | Splitting within one database vs across machines. | Study 1 | Ex 1 |
+| 3b · Choosing the shard key | Range vs hash; what a good key looks like. | Study 4, 5 | Ex 2 |
+| 3c · Hot spots | When one shard gets most of the traffic. | Study 4 | Break it |
+| 3d · Consistent hashing | The ring and virtual nodes. | Study 2, 3 | Ex 3-4 |
+| 3e · The pain | Cross-shard queries, joins and resharding. | Study 4 | Ex 5 |
+| 4 · Live demo | Add a node: keys moved with `% N` vs with the ring. | — | Ex 4 |
+| 5 · Break it | A skewed shard key overloading one shard. | Study 4 | Break it |
+| 6 · Your numbers | Keys moved and spread for 10, 100, 1,000 virtual nodes. | — | Measure it |
+| 7 · When not to shard | Bigger machine, replicas and partitioning come first. | Study 4 | — |
+
 **Video idea:** *When one database isn't enough: sharding explained*
 
 ### T18 · Distributed ID generation, depth L2
@@ -757,6 +1044,23 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** insert 1 million UUIDv4 primary keys vs 1 million sequential ones (or UUIDv7). Compare insert time and index size. The difference surprises most people.
 - **Ready to record when:** you can design an ID scheme on the whiteboard and defend each bit.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Auto-increment on several shards gives duplicate IDs. | Study 3 | — |
+| 2 · Mental model | An ID = timestamp + who made it + a counter. | Study 1, 2 | — |
+| 3a · Why auto-increment breaks | One counter can't live on many machines. | Study 3 | — |
+| 3b · UUIDs | v4 vs v7, and index locality. | Study 4 | Ex 4 |
+| 3c · Snowflake | The bit layout. | Study 1, 2 | Ex 1-2 |
+| 3d · Instagram's variant | Generating IDs inside Postgres. | Study 3 | — |
+| 3e · Clocks | Clock skew and going backwards. | Study 2 | Break it |
+| 3f · Short codes | Base62, and why guessable IDs are a risk. | — | Ex 3 |
+| 4 · Live demo | Generate an ID and decode it back into time, machine and sequence. | — | Ex 1 |
+| 5 · Break it | Move the clock backwards and get duplicates. | Study 2 | Break it |
+| 6 · Your numbers | Insert speed and index size, UUIDv4 vs sequential. | — | Measure it |
+| 7 · Which scheme when | UUIDv7 vs Snowflake vs in-database generation. | Study 3, 4 | — |
+
 **Video idea:** *How big apps generate billions of unique IDs without one central counter*
 
 ### T19 · Consistency models and CAP, depth L2 (concept-heavy)
@@ -784,6 +1088,23 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** cut one node off the network (`docker network disconnect`). At `ALL`, writes fail (choosing consistency); at `ONE`, they succeed but reads may be stale (choosing availability). That's CAP, live.
 - **Measure it:** read and write latency at `ONE` vs `QUORUM` (PACELC's "else latency").
 - **Ready to record when:** you can state CAP precisely and correct the most common misunderstanding of it.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Two replicas give two different answers to the same question. | Study 1 | — |
+| 2 · Mental model | Two copies of a notebook in two cities, with a bad phone line between them. | Study 1 | — |
+| 3a · Strong vs eventual | What each one promises. | Study 1, 5 | — |
+| 3b · Client guarantees | Read-your-writes, monotonic reads. | Study 3 | Ex 1 |
+| 3c · Linearizability | Headline level. | Study 1, 3 | Ex 1 |
+| 3d · CAP, stated correctly | It's only a choice during a partition. | Study 2, 4 | Break it |
+| 3e · PACELC | The everyday trade-off is latency. | Study 2 | Measure it |
+| 3f · Quorums | N, R, W and why R + W > N overlaps. | Study 6 | Ex 2-3 |
+| 4 · Live demo | Cut a node off the network and write at `ALL` vs `ONE`. | — | Break it |
+| 5 · Break it | The partition itself (same as the demo). | Study 2 | Break it |
+| 6 · Your numbers | Latency at `ONE` vs `QUORUM`. | — | Measure it |
+| 7 · Choosing per feature | Bank balance strong, view counter eventual. | Study 4, 5 | — |
 
 **Video idea:** *The CAP theorem is misunderstood. Here's what it really says*
 
@@ -821,6 +1142,23 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** plot allowed vs rejected requests over time for each algorithm under the same bursty k6 load. Put the charts side by side.
 - **Ready to record when:** you can draw each algorithm's behaviour over time and say which one you'd use for an API vs for login attempts.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | A bot hammers your login or OTP endpoint. | Study 1 | — |
+| 2 · Mental model | A bucket of tokens that refills at a steady rate. | Study 1 | — |
+| 3a · Fixed window | How it works, and the burst at the window edge. | Study 1 | Ex 1-2 |
+| 3b · Sliding windows | The log and the counter. | Study 2 | Ex 3 |
+| 3c · Token and leaky buckets | Smooth limits with bursts allowed. | Study 1, 3 | Ex 4 |
+| 3d · Where and what to limit | Edge, gateway or app; IP, user, key, phone number. | Study 1, 3 | — |
+| 3e · Distributed limiting | Redis-backed limits and their race conditions. | Study 1 | Break it |
+| 3f · Telling the client | `429`, `Retry-After`, limit headers. | Study 4 (+ IETF link) | Ex 6 |
+| 4 · Live demo | A k6 burst against your token bucket, with the allowed/rejected chart. | — | Ex 4-5 |
+| 5 · Break it | GET-then-SET leaking past the limit. | Study 1 | Break it |
+| 6 · Your numbers | The four algorithms' charts side by side. | — | Measure it |
+| 7 · When limits aren't enough | CAPTCHA and making abuse expensive. | Study 3 | — |
+
 **Video idea:** *Four ways to rate limit an API (and which one to pick)*
 
 ### T21 · Timeouts, retries, circuit breakers and bulkheads, depth L3
@@ -850,6 +1188,23 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** retries at 3 layers (3 × 3 × 3 = 27 times the load) against a struggling B: a retry storm.
 - **Measure it:** A's success rate and p99 latency in each of the 5 setups. That's one powerful chart for the video.
 - **Ready to record when:** you can explain how one slow dependency cascades, and how each pattern stops it.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | One slow dependency takes down every endpoint. | Study 1 | Ex 1 |
+| 2 · Mental model | Electrical fuses and a ship's watertight compartments. | Study 3, 4 | — |
+| 3a · How cascades happen | Pools fill up while waiting. | Study 1 | Ex 1 |
+| 3b · Timeouts | Choosing them from latency percentiles. | Study 1 | Ex 2 |
+| 3c · Retries | Backoff, jitter, retry budgets. | Study 1, 2, 3 (Retry) | Ex 3 |
+| 3d · Circuit breakers | Closed, open, half-open. | Study 3, 4 | Ex 4 |
+| 3e · Bulkheads | Isolating pools per dependency. | Study 3 (Bulkhead) | Ex 5 |
+| 3f · Load shedding | Rejecting work early to survive. | Study 5 | — |
+| 4 · Live demo | Toxiproxy latency with no protection, then with a breaker. | Study 6 (setup) | Ex 1, 4 |
+| 5 · Break it | Retries at three layers: a retry storm. | Study 1 | Break it |
+| 6 · Your numbers | Success rate and p99 across the five setups, in one chart. | — | Measure it |
+| 7 · The cost of each pattern | Complexity, tuning, and failing fast vs waiting. | Study 3 | — |
 
 **Video idea:** *How one slow API can take down an entire app*
 
@@ -885,6 +1240,23 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** average vs p50 vs p99 under that load.
 - **Ready to record when:** you can explain why averages lie, and what an error budget is used for.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Users complain while the dashboard says everything's fine. | Study 5 | — |
+| 2 · Mental model | Logs are a diary, metrics are dashboard gauges, traces are a GPS route. | Study 2 | — |
+| 3a · Logs, metrics, traces | What each is for. | Study 2 | — |
+| 3b · What to measure | Golden signals, RED, USE. | Study 2, 4 | Ex 1-2 |
+| 3c · Percentiles | Why averages hide pain. | Study 5, 6 | Ex 3 |
+| 3d · SLIs, SLOs, error budgets | Defining "good enough" and spending the budget. | Study 1, 3 | Ex 4 |
+| 3e · Alerting | Alert on symptoms, not causes. | Study 2, 3 | Ex 5 |
+| 3f · Tracing | Finding the slow hop across services (headline). | "Still unclear" link | Ex 6 |
+| 4 · Live demo | The RED dashboard during a load test. | — | Ex 2 |
+| 5 · Break it | 2% slow requests: the average barely moves, p99 jumps. | Study 5 | Break it |
+| 6 · Your numbers | Average vs p50 vs p99 under that load. | — | Measure it |
+| 7 · What not to alert on | Causes, noise, and anything nobody will act on. | Study 2 | — |
+
 **Video idea:** *Average latency lies: p99 and SLOs explained*
 
 ### T23 · Containers and safe deployments, depth L2
@@ -919,6 +1291,24 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** rename a column the naive way (deploy code and migration together) while k6 runs and count the errors. Then do it with expand → migrate → contract and get zero errors.
 - **Measure it:** errors during a rolling deploy with and without readiness probes; rollback time.
 - **Ready to record when:** you can do a zero-downtime column rename from memory and explain canary vs blue-green.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Most outages happen right after a change. | Study 8 | — |
+| 2 · Mental model | Changing tyres on a moving car: swap one at a time, keep the old one close. | Study 6 | — |
+| 3a · Containers and images | Layers and small images. | Study 1, 2 | Ex 1 |
+| 3b · What Kubernetes does | Headline level: desired state, replicas, services. | Study 3, 4 | — |
+| 3c · Rolling updates and probes | Readiness vs liveness. | Study 4, 5 | Ex 2-3 |
+| 3d · Blue-green and canary | Switching all at once vs a small slice first. | Study 6 | Ex 4-5 |
+| 3e · Feature flags | Turning features on without deploying. | Study 7 | Ex 6 |
+| 3f · Database migrations | Expand/contract (parallel change). | Study 6, 8 | Break it |
+| 3g · Rollback | Getting back fast. | Study 4 | Ex 7 |
+| 4 · Live demo | A naive column rename vs expand/contract under load. | — | Break it |
+| 5 · Break it | The naive rename (same as the demo). | Study 8 | Break it |
+| 6 · Your numbers | Errors with/without readiness probes; rollback time. | — | Measure it |
+| 7 · Which strategy when | Rolling vs blue-green vs canary vs flags. | Study 6, 7 | — |
 
 **Video idea:** *How teams deploy 40 times a day without breaking anything*
 
@@ -956,6 +1346,23 @@ Ordered so that each tool only needs the ones before it.
 - **Measure it:** delay from order to event for the polling relay vs Debezium.
 - **Ready to record when:** you can explain the dual-write problem in one sentence and draw the outbox fix.
 
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | The order is saved but its event is never sent. | Study 3 | — |
+| 2 · Mental model | No single transaction any more: a checklist of steps, each with an undo. | Study 4 | — |
+| 3a · When to split | Monolith first; the prerequisites. | Study 1, 2 | — |
+| 3b · Sync vs async | REST/gRPC calls vs events. | Study 2 | Ex 1-2 |
+| 3c · Why not 2PC | The cost of distributed transactions. | Study 4 | — |
+| 3d · Sagas | Compensations; orchestration vs choreography. | Study 3, 4 | Ex 3 |
+| 3e · Dual writes and the outbox | Why "save, then publish" fails; the outbox fix. | Study 3 | Ex 4 |
+| 3f · CDC | Debezium reading the outbox. | Study 5 | Ex 5 |
+| 4 · Live demo | Kill the service between save and publish; then the same kill with the outbox. | — | Break it, Ex 4 |
+| 5 · Break it | The dual-write failure (same as the demo). | Study 3 | Break it |
+| 6 · Your numbers | Event delay: polling relay vs Debezium. | — | Measure it |
+| 7 · When not to use microservices | Small teams and young products. | Study 1 | — |
+
 **Video idea:** *Saved to the database but the event never sent: the dual-write problem*
 
 ### T25 · Real-time: polling, SSE, WebSockets, depth L2
@@ -984,6 +1391,22 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** restart one instance: every client on it disconnects at once and they all reconnect together (a thundering herd). Add reconnect jitter and compare.
 - **Measure it:** open 10,000 connections with k6 (WebSocket mode) and record server memory per connection; requests per minute from polling vs a single socket for the same updates.
 - **Ready to record when:** you can say when SSE is enough, and how WebSockets scale beyond one server.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Live updates without the user pressing refresh. | Study 1 | — |
+| 2 · Mental model | Asking "are we there yet?" over and over vs keeping a phone line open. | Study 1 | — |
+| 3a · Polling and long polling | How they work and what they cost. | Study 1 | Ex 1 |
+| 3b · Server-sent events | One-way server push over HTTP. | Study 1, 2 | Ex 1 |
+| 3c · WebSockets | Two-way, long-lived connections; proxying them. | Study 1, 2, 3 | Ex 2 |
+| 3d · Scaling across servers | A pub/sub backplane. | Study 4 | Ex 3-4 |
+| 3e · Reliability | Heartbeats, reconnects with backoff, delivery acks. | Study 1 | Ex 5-6 |
+| 4 · Live demo | Two instances that can't see each other's messages, fixed with Redis pub/sub. | — | Ex 3-4 |
+| 5 · Break it | A restart makes every client reconnect at once; jitter fixes it. | Study 4 | Break it |
+| 6 · Your numbers | Memory per connection; requests from polling vs one socket. | — | Measure it |
+| 7 · Which to choose | When SSE is enough, when you need WebSockets, when polling is fine. | Study 1, 2 | — |
 
 **Video idea:** *Polling vs SSE vs WebSockets: how live apps actually work*
 
@@ -1016,6 +1439,24 @@ Ordered so that each tool only needs the ones before it.
 - **Break it:** query with a plain B-tree index on `(lat, lng)` and read the `EXPLAIN` to see why it's slow.
 - **Measure it:** nearest-neighbour query time with no index, a B-tree, Redis GEO and a PostGIS GiST index; the update throughput Redis sustains for moving points.
 - **Ready to record when:** you can explain geohash and its edge problem on a whiteboard, and when you'd choose PostGIS over Redis.
+
+**Video breakdown**
+
+| Part | What you cover | Learn from | Practise with |
+|---|---|---|---|
+| 1 · Problem | Find the nearest of 50,000 points in milliseconds. | — | — |
+| 2 · Mental model | A grid of map squares: search only your square and its neighbours. | Study 1 | — |
+| 3a · Why a normal index fails | Two separate ranges don't make a circle. | Study 3 (Spatial Indexing) | Break it |
+| 3b · Geohash | Encoding and shared prefixes. | Study 1 | Ex 1 |
+| 3c · The edge problem | Close points with different geohashes; checking neighbours. | Study 1 | Ex 2 |
+| 3d · Quadtrees | Splitting cells that get too full. | Study 3 | Ex 5 |
+| 3e · S2 and H3 | Headline level: better cells. | Study 4 | — |
+| 3f · Tools | Redis GEO vs PostGIS. | Study 2, 3 | Ex 3-4 |
+| 3g · Moving objects | Updating thousands of positions every few seconds. | Study 2 | Ex 6 |
+| 4 · Live demo | Radius search in Redis, with the points shown on a map. | — | Ex 3 |
+| 5 · Break it | A B-tree on (lat, lng) and its `EXPLAIN`. | Study 3 | Break it |
+| 6 · Your numbers | No index vs B-tree vs Redis GEO vs PostGIS GiST; update throughput. | — | Measure it |
+| 7 · Which to choose | PostGIS for rich queries, Redis for fast-moving points. | Study 2, 3 | — |
 
 **Video idea:** *How apps find what's nearest to you in milliseconds*
 
