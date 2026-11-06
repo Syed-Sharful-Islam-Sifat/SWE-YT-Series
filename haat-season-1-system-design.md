@@ -8,7 +8,7 @@
 
 The first 21 videos are scenario-based system design. Something goes wrong ("we sold 12,000 phones but only had 10,000"), and you solve it on the whiteboard by comparing several approaches. There's no coding on screen, just reasoning, diagrams and back-of-envelope numbers. AI topics start in Season 2, after Episode 21.
 
-**Season 0, The Toolbox, comes first and runs alongside.** Before each Haat act, one deep-dive video per component (Nginx, Postgres, Redis, queues and so on), with hands-on demos. Haat episodes then link back to them instead of explaining each tool from scratch. The full component list, depth levels and schedule are in [season-0-toolbox.md](season-0-toolbox.md).
+**Season 0, The Toolbox, comes first.** It's a separate, standalone series: one hands-on deep-dive video per tool (Nginx, Postgres, Redis, queues and so on), not connected to the Haat story. It's how you build real, practised knowledge of every component before designing with them here. The tool list, depth levels, practice exercises and schedule are in [season-0-toolbox.md](season-0-toolbox.md).
 
 ## One app, one story
 
@@ -191,7 +191,7 @@ Watch a video *after* you've done your own Day 2 solving, not before, so your ex
 
 ## Before Episode 1: the pre-season plan (4 weeks)
 
-> **Updated plan:** Weeks 1-3 below are now covered in much more depth by the Toolbox videos T1-T15 in [season-0-toolbox.md](season-0-toolbox.md). Use these weeks as a quick self-check. Week 4 (production rehearsal) now happens before Toolbox #1, and the launch rule applies to Toolbox videos too.
+> **Updated plan:** Season 0 ([season-0-toolbox.md](season-0-toolbox.md)) now covers Weeks 1-3 in far more depth, with hands-on practice for every tool. If you've finished Season 0, treat these weeks as a quick self-check. Week 4's production rehearsal happens before Toolbox #1 instead.
 
 **How much to cover before you start:** go deep on the foundations that come back in every act, sketch a rough map of the rest of the season, and fully prepare only Episodes 1-3. Don't try to master all 21 topics first. You'll learn Episode 14 best in the weeks before Episode 14, and over-preparing is the most common way a series never starts.
 
