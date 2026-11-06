@@ -8,6 +8,8 @@
 
 The first 21 videos are scenario-based system design. Something goes wrong ("we sold 12,000 phones but only had 10,000"), and you solve it on the whiteboard by comparing several approaches. There's no coding on screen, just reasoning, diagrams and back-of-envelope numbers. AI topics start in Season 2, after Episode 21.
 
+**Season 0, The Toolbox, comes first and runs alongside.** Before each Haat act, one deep-dive video per component (Nginx, Postgres, Redis, queues and so on), with hands-on demos. Haat episodes then link back to them instead of explaining each tool from scratch. The full component list, depth levels and schedule are in [season-0-toolbox.md](season-0-toolbox.md).
+
 ## One app, one story
 
 **Haat starts as a Facebook page.** A clothing seller in Dhaka has run their business on Facebook for years: about 80,000 followers, orders through Messenger comments and inbox, an Excel sheet for orders, cash on delivery and a courier service. It works, but it's falling apart: orders get lost in the inbox, the same dress gets sold twice, every post needs a paid boost to be seen, and one page ban could end the business overnight.
@@ -76,7 +78,7 @@ Each episode below includes a **Callback** line written for this purpose.
 
 # The confidence playbook: how to prepare any episode
 
-Every episode below has its own **Learning guide** (what to learn, in what order, from where, and how to know you're ready) and its own **Prep plan**. This section is the method behind all of them. Read it once before Episode 1 and come back whenever you feel unsure.
+Every episode below has its own **Learning guide** (what to learn, in what order, from where, and how to know you're ready) and its own **Prep plan**. This section is the method behind all of them. Read it once before Episode 1 and come back whenever you feel unsure. If you haven't started the series yet, begin with **Before Episode 1: the pre-season plan** below.
 
 ## Where confidence on camera comes from
 
@@ -184,6 +186,67 @@ Watch a video *after* you've done your own Day 2 solving, not before, so your ex
 - **Excalidraw** (excalidraw.com): free, hand-drawn-style whiteboard. Good for both planning and recording.
 - **OBS Studio**: free screen and camera recording.
 - A basic USB or lavalier microphone matters more than the camera. Viewers forgive average video, not bad audio.
+
+---
+
+## Before Episode 1: the pre-season plan (4 weeks)
+
+> **Updated plan:** Weeks 1-3 below are now covered in much more depth by the Toolbox videos T1-T15 in [season-0-toolbox.md](season-0-toolbox.md). Use these weeks as a quick self-check. Week 4 (production rehearsal) now happens before Toolbox #1, and the launch rule applies to Toolbox videos too.
+
+**How much to cover before you start:** go deep on the foundations that come back in every act, sketch a rough map of the rest of the season, and fully prepare only Episodes 1-3. Don't try to master all 21 topics first. You'll learn Episode 14 best in the weeks before Episode 14, and over-preparing is the most common way a series never starts.
+
+Budget: about 2-3 hours a day, roughly 60-70 hours in total.
+
+### Week 1: Core foundations (go deep)
+These come up in almost every episode. If you're shaky on them, every episode will feel shaky.
+- **How a request travels:** DNS, TCP/TLS at headline level, HTTP request/response, web server → app → database. Draw it from memory.
+- **Databases:** tables and indexes (why `LIKE '%dress%'` is slow), transactions, what "isolation level" means, `SELECT ... FOR UPDATE`.
+- **Estimation:** daily → per second, peak vs average, storage per year. Do 10 practice estimates using the cheat sheet above.
+- *Read:* Alex Xu Vol. 1, Chapters 1-3 (all of Chapter 1 this time); DDIA Chapter 1, Chapter 3 (skim, for indexes) and Chapter 7 "Transactions" (the first half).
+- **Weekly test:** explain each topic out loud in 2 minutes, without notes.
+
+### Week 2: The recurring building blocks (go deep, hands-on)
+These are the boxes the whole season keeps reusing (see *Recurring building blocks* in the Continuity Bible).
+- **Redis:** strings, `INCR`, `SET NX EX`, sorted sets, TTLs. These cover sessions, cache, rate limits, stock counters and leases.
+- **Caching:** cache-aside, TTL, invalidation, what a stampede is.
+- **Queues:** producer/consumer, at-least-once delivery, retries, dead-letter queues.
+- **Idempotency:** why retries cause duplicates and how an idempotency key stops them.
+- **Replication basics:** primary/replica and replication lag (just enough to plant it; Episode 11 goes deep).
+- *Read:* DDIA Chapter 5 "Replication" (the first section), Chapter 11 (the messaging part only); the Redis docs on data types; the AWS Builders' Library article "Making retries safe with idempotent APIs".
+- **Labs (do these; they're where most of the confidence comes from):**
+  1. In Postgres, open two terminals and make two "checkouts" oversell one item. Then fix it with `FOR UPDATE` and again with an atomic `UPDATE ... WHERE stock > 0`. That's Episode 7, done by hand.
+  2. In Redis, build a 10-line rate limiter with `INCR` + `EXPIRE`.
+  3. Run a queue (Redis lists, or RabbitMQ in Docker), kill the consumer halfway through a job, and watch the message come back.
+
+### Week 3: A map of the whole season (skim only)
+The goal is to know where the story goes, so that the shortcuts, callbacks and cliffhangers you plant in Act 1 point the right way. It's not to master Acts 2-5.
+- Skim about 30 minutes per chapter (diagrams and summary only): Alex Xu Vol. 1 Chapters 4 (rate limiter), 5 (consistent hashing), 7 (unique IDs), 10 (notifications), 11 (news feed), 12 (chat), 13 (autocomplete); Vol. 2 "Proximity service", "Hotel reservation" and "Payment system".
+- Watch the first 2-3 lectures of Martin Kleppmann's distributed systems series.
+- Read the Continuity Bible and the *Season at a glance* table until you can tell the whole Haat story in 3 minutes.
+- **Weekly test:** for each of the 21 episodes, write one sentence: what breaks, and the core idea of the fix. If you can write all 21, your map is good enough.
+
+### Week 4: Production rehearsal and the launch buffer
+- **Day 1-2:** set up the microphone, OBS and the Excalidraw template (Episode 1's Day 4 covers the visual style). Record a throwaway 5-minute pilot ("What is a cache?"), watch it back, and fix your audio and pacing. Nobody ever sees this one.
+- **Day 3 onward:** start Episode 1's prep plan (6 days), then Episode 2's.
+
+### The launch rule
+**Don't publish Episode 1 until Episodes 1-3 are recorded and Episode 4 is in prep.** A two-episode buffer means a bad week never breaks your upload schedule, and you can still go back and add a callback in Episode 1 if Episode 3's prep reveals one.
+
+### Ready-to-start checklist
+- [ ] I can draw the request flow and explain an index, a transaction and a race condition without notes.
+- [ ] I've done all three Week 2 labs myself.
+- [ ] I can write the 21 one-sentence summaries from memory.
+- [ ] I've watched my pilot recording and fixed the audio.
+- [ ] Episodes 1-3 are recorded.
+
+### After launch: keep a pipeline going
+- **Rhythm:** while you edit Episode N, you're learning Episode N+2. Use each episode's 4-day routine.
+- **Plan for the heavy episodes:** 7, 8, 11, 13, 14 and 21 each need an extra day or two of prep. Schedule a lighter week before them.
+- **Refresh before each act** (one weekend each):
+  - *Before Act 2 (Ep 7):* DDIA Chapter 7, the whole chapter.
+  - *Before Act 3 (Ep 11):* DDIA Chapters 5, 6 and 9, plus Kleppmann lectures on replication and consistency.
+  - *Before Act 4 (Ep 16):* Alex Xu Vol. 2 "Proximity service" and "Nearby friends"; Hussein Nasser on WebSockets.
+  - *Before Act 5 (Ep 20):* *Release It!* Part I, and the SRE book chapters "Embracing Risk" and "Managing Incidents".
 
 ---
 
