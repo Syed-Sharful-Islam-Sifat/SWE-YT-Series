@@ -26,26 +26,18 @@ Before each video you **practise with the tool hands-on**. The practice is where
 
 ## Free learning resources
 
-Every tool below has its own **Learn from (all free)** list:
-- **Core, enough on its own:** 2-3 resources. If you read these and do the practice exercises, you have enough for the video.
-- **Watch:** a video, when a good one exists.
-- **Go further (optional):** for when something is still unclear, or you want an extra story for the video.
+Every tool below has a **Study path**: a numbered list of exact pages, chapters, sections and lecture numbers, in the order to study them, each with a time estimate. Everything on it is free. Finish the study path and the practice exercises, and you have enough for the video. Some tools also have an *If something is still unclear* line: use it only if you need it.
 
-Everything listed is free to read or watch. The paid books (*Designing Data-Intensive Applications*, Alex Xu's *System Design Interview*, *Release It!*) are excellent but optional. Borrow them if you can; you don't need them for this season.
+All links were checked on Nov 6, 2026. Most opened directly. A few sites (Cloudflare, X/Twitter, Uber, LinkedIn, Instagram's blog) block automated checks, so those were confirmed by title search instead; they open normally in a browser. The Stanford IR book PDFs (T11) couldn't be reached from the checking machine, but the book is still listed at nlp.stanford.edu/IR-book. If a link ever breaks, search its exact title in quotes.
 
-**Free resources that cover many tools (bookmark these once):**
-- **Martin Kleppmann's *Distributed Systems* lectures** (University of Cambridge, free on YouTube) plus his free lecture notes PDF. This is the closest free substitute for *DDIA* for T12-T19.
-- **CMU 15-445 *Database Systems*** by Andy Pavlo (free on YouTube, with slides on the course site), for T4-T6 and T16-T17.
-- **MIT 6.5840 *Distributed Systems*** (free lectures and labs on the course site), for T16-T19 if you want more depth.
-- **AWS Builders' Library** (aws.amazon.com/builders-library): short articles by Amazon engineers on caching, timeouts, retries, health checks and load shedding.
-- **Microsoft Azure Architecture Center, Cloud Design Patterns** (learn.microsoft.com): one clear page per pattern (retry, circuit breaker, bulkhead, saga, cache-aside and more), product-neutral despite the name.
-- **The System Design Primer** (github.com/donnemartin/system-design-primer): a free overview of almost every tool here, good for revision.
-- **Google *SRE book* and *SRE Workbook*** (sre.google/books), for T6, T21 and T22.
-- **martinfowler.com** and **microservices.io**, for T21, T23 and T24.
-- **YouTube channels:** Hussein Nasser (backend fundamentals), ByteByteGo (short animated overviews), Arpit Bhayani (internals). Watch them *after* your own practice, so your explanation stays yours.
-- **Official docs:** for Postgres, Redis, RabbitMQ, Kafka, Nginx and OpenSearch, the official docs are genuinely the best source. Get used to reading them; it's also what you'll tell viewers to do.
+The paid books (*Designing Data-Intensive Applications*, Alex Xu's *System Design Interview*, *Release It!*) are excellent but optional. Nothing in this season needs them.
 
-**How to find any resource:** search the exact title in quotes. Titles of blog posts and talks are more stable than URLs, which change when companies redesign their sites.
+**The three free courses used most across the season** (bookmark them once):
+- [Martin Kleppmann, *Distributed Systems* lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB) (Cambridge, 23 short lectures) and its [lecture notes (PDF)](https://www.cl.cam.ac.uk/teaching/2122/ConcDisSys/dist-sys-notes.pdf). Used in T16 and T19.
+- [CMU 15-445 *Intro to Database Systems*, Fall 2024](https://www.youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq) by Andy Pavlo, with slides on the [course schedule](https://15445.courses.cs.cmu.edu/fall2024/schedule.html). Used in T4 and T5.
+- [Google SRE book and SRE Workbook](https://sre.google/books/). Used in T6 and T22.
+
+**Good for revision once a module is done:** [The System Design Primer](https://github.com/donnemartin/system-design-primer), [Azure Cloud Design Patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/), and the [AWS Builders' Library](https://builder.aws.com/learn/topics/builders-library).
 
 ## How to practise (applies to every tool)
 
@@ -80,7 +72,7 @@ Everything listed is free to read or watch. The paid books (*Designing Data-Inte
 
 ## The 6-day prep routine for each video
 
-- **Day 1, Read:** the tool's *Core* resources (watch the *Watch* item if there is one). Write one paragraph in your own words for each *Must know* item.
+- **Day 1, Read:** the tool's *Study path*, in order. Write one paragraph in your own words for each *Must know* item.
 - **Day 2, Exercises:** Setup, plus the first half of the exercises.
 - **Day 3, Exercises:** the rest of the exercises, plus *Break it*.
 - **Day 4, Measure and go deeper:** *Measure it*, plus the mini-project if there's one. For L3 tools, answer "why?" twice for each *Must know* item. Write answers to the questions viewers are likely to ask.
@@ -121,7 +113,7 @@ Ordered so that each tool only needs the ones before it.
 | T7 | Redis | Redis | **L3** |
 | T8 | Caching patterns and CDN | Redis, Cloudflare (free tier) | **L3** / L2 |
 | T9 | Sessions, cookies, JWT and OTP login | Lab app + Redis | L2 |
-| T10 | Object storage and file uploads | MinIO (S3-compatible) | L2 |
+| T10 | Object storage and file uploads | Garage (S3-compatible) | L2 |
 | T11 | Search engines | OpenSearch / Elasticsearch | L2 (L3 for the inverted index) |
 | **Module 4: Working in the background** | | | |
 | T12 | Message queues | RabbitMQ | **L3** |
@@ -163,13 +155,15 @@ Ordered so that each tool only needs the ones before it.
 - Round trips and latency, and why distance matters.
 
 **Skip:** TCP congestion-control internals, QUIC details.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. *High Performance Browser Networking* by Ilya Grigorik (hpbn.co): Chapters 1-4 (latency, TCP, UDP headline, TLS).
-  2. MDN Web Docs, "An overview of HTTP" and "HTTP caching" (developer.mozilla.org).
-  3. Cloudflare Learning Center, "What is DNS?" and "What happens in a TLS handshake?" (cloudflare.com/learning).
-- *Watch:* Julia Evans's *Mess With DNS* (messwithdns.net): a free playground where you make real DNS records and watch queries arrive.
-- *Go further (optional):* The free *How DNS Works* comic (howdns.works).
+**Study path (free, in this order, ~5 h)**
+1. [HPBN, Ch. 1 "Primer on Latency and Bandwidth"](https://hpbn.co/primer-on-latency-and-bandwidth/): the whole chapter. *(40 min)*
+2. [HPBN, Ch. 2 "Building Blocks of TCP"](https://hpbn.co/building-blocks-of-tcp/): read "Three-Way Handshake" and "Head-of-Line Blocking" closely; skim the congestion-control sections. *(45 min)*
+3. [HPBN, Ch. 4 "Transport Layer Security (TLS)"](https://hpbn.co/transport-layer-security-tls/): read "Encryption, Authentication, and Integrity", "TLS Handshake" and "Chain of Trust and Certificate Authorities". *(45 min)*
+4. [MDN, "An overview of HTTP"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview): the whole page. *(30 min)*
+5. [Cloudflare, "What is DNS?"](https://www.cloudflare.com/learning/dns/what-is-dns/): the whole page, including the 8 steps of a lookup. *(20 min)*
+6. [Mess With DNS](https://messwithdns.net/): do the built-in experiments. You create real records and watch queries arrive live. *(1 h)*
+
+*If something is still unclear:* ["How DNS Works" comic](https://dnsimple.com/comics/how-dns-works/); [Cloudflare, "What happens in a TLS handshake?"](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/).
 
 **Practice**
 - **Setup:** nothing to install beyond `dig`, `curl` and a browser.
@@ -192,13 +186,12 @@ Ordered so that each tool only needs the ones before it.
 - Reading access and error logs.
 
 **Skip:** Nginx modules, OpenResty/Lua.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. The official Nginx "Beginner's Guide" (nginx.org/en/docs/beginners_guide.html).
-  2. The NGINX Admin Guide sections "Web Server" and "Reverse Proxy" (docs.nginx.com).
-  3. DigitalOcean's tutorial "Understanding Nginx Server and Location Block Selection Algorithms".
-- *Watch:* Hussein Nasser's Nginx and reverse-proxy videos on YouTube.
-- *Go further (optional):* The Nginx module reference for `ngx_http_proxy_module` (every directive explained).
+**Study path (free, in this order, ~3 h)**
+1. [Nginx, "Beginner's Guide"](https://nginx.org/en/docs/beginners_guide.html): the whole page. *(30 min)*
+2. [NGINX Admin Guide, "Serving Static Content"](https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/). *(20 min)*
+3. [NGINX Admin Guide, "NGINX Reverse Proxy"](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/): the whole page (headers, buffers, binding). *(30 min)*
+4. [DigitalOcean, "Understanding Nginx Server and Location Block Selection Algorithms"](https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms): how Nginx picks which config applies. *(45 min)*
+5. Keep open while practising: [`ngx_http_proxy_module` reference](https://nginx.org/en/docs/http/ngx_http_proxy_module.html). Look up `proxy_pass`, `proxy_set_header`, `proxy_read_timeout` and `proxy_connect_timeout`. *(as needed)*
 
 **Practice**
 - **Setup:** Nginx and the lab app in docker compose.
@@ -225,13 +218,11 @@ Ordered so that each tool only needs the ones before it.
 - The load balancer as a single point of failure (pairs, floating IPs, managed load balancers). Autoscaling at headline level.
 
 **Skip:** BGP/anycast (L1).
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Sam Rose, "Load Balancing" (samwho.dev/load-balancing): an interactive visual essay, the best intro there is.
-  2. NGINX Admin Guide, "HTTP Load Balancing" (docs.nginx.com).
-  3. AWS Builders' Library, "Implementing health checks" (aws.amazon.com/builders-library).
-- *Watch:* Hussein Nasser's videos on L4 vs L7 load balancers.
-- *Go further (optional):* The HAProxy Starter Guide (docs.haproxy.org) for active health checks and algorithms.
+**Study path (free, in this order, ~3 h)**
+1. [Sam Rose, "Load Balancing"](https://samwho.dev/load-balancing/): the whole interactive essay, playing with every simulation. *(45 min)*
+2. [NGINX Admin Guide, "HTTP Load Balancing"](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/): load-balancing methods, server weights, passive health checks. *(45 min)*
+3. [AWS Builders' Library, "Implementing health checks"](https://builder.aws.com/content/3Ev53O39izHCtWLzp4XU6t8PC1O/implementing-health-checks): the whole article. *(45 min)*
+4. [HAProxy docs, "Health checks"](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/reliability/health-checks/): for the active health checks in exercise 3. *(20 min)*
 
 **Practice**
 - **Setup:** Nginx (or HAProxy) in front of 3 copies of the lab app (`docker compose up --scale app=3`). Make the app print its container name in each response.
@@ -262,13 +253,18 @@ Ordered so that each tool only needs the ones before it.
 - MVCC at headline level (it sets up T5).
 
 **Skip:** planner cost-model internals, VACUUM tuning.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. *Use The Index, Luke* by Markus Winand (use-the-index-luke.com): read the whole thing. This alone covers indexes to L3.
-  2. PostgreSQL docs, chapters "Indexes" and "Using EXPLAIN" (postgresql.org/docs).
-  3. CMU 15-445 *Database Systems* (Andy Pavlo, free on YouTube): the lectures on storage, B+trees and query execution.
-- *Watch:* The CMU 15-445 B+tree lectures, for the internals behind the diagrams.
-- *Go further (optional):* SQL practice at pgexercises.com; paste your plans into explain.depesz.com to read them more easily; the PgBouncer docs (pgbouncer.org).
+**Study path (free, in this order, ~10 h)**
+1. [Use The Index, Luke, Ch. 1 "Anatomy of an Index"](https://use-the-index-luke.com/sql/anatomy): all three sections (leaf nodes, the B-tree, slow indexes). *(1 h)*
+2. [Use The Index, Luke, Ch. 2 "The Where Clause"](https://use-the-index-luke.com/sql/where-clause): every section. It includes ["LIKE filters"](https://use-the-index-luke.com/sql/where-clause/searching-for-ranges/like-performance-tuning), which is exercise 4. *(2 h)*
+3. [Use The Index, Luke, Ch. 3 "Performance and Scalability"](https://use-the-index-luke.com/sql/testing-scalability). *(45 min)*
+4. [Use The Index, Luke, Ch. 5 "Clustering Data"](https://use-the-index-luke.com/sql/clustering): index-only scans and covering indexes. *(45 min)*
+5. [Use The Index, Luke, Ch. 8 "Modifying Data"](https://use-the-index-luke.com/sql/dml): why every index slows down inserts. *(30 min)*
+6. [PostgreSQL docs, "Indexes"](https://www.postgresql.org/docs/current/indexes.html): the sections "Introduction", "Index Types", "Multicolumn Indexes", "Partial Indexes" and "Index-Only Scans and Covering Indexes". *(1 h)*
+7. [PostgreSQL docs, "Using EXPLAIN"](https://www.postgresql.org/docs/current/using-explain.html): "EXPLAIN Basics" and "EXPLAIN ANALYZE". *(1 h)*
+8. Watch: [CMU 15-445 (Fall 2024)](https://www.youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq), **Lecture #08 "Indexes & Filters I"** (B+trees). Slides are on the [course schedule](https://15445.courses.cs.cmu.edu/fall2024/schedule.html). *(1.5 h)*
+9. [PgBouncer, "Usage"](https://www.pgbouncer.org/usage.html): the pooling modes (session, transaction, statement). *(20 min)*
+
+*If something is still unclear:* SQL warm-up at [pgexercises.com](https://pgexercises.com/) (the "Basic" and "Joins" sets); paste plans into [explain.depesz.com](https://explain.depesz.com/) to read them more easily; CMU Lecture #03 "Database Storage I" for how rows sit on disk.
 
 **Practice**
 - **Setup:** Postgres in Docker, plus `psql`. Turn on `\timing`.
@@ -297,13 +293,14 @@ Ordered so that each tool only needs the ones before it.
 - Deadlocks: how they happen and how the database resolves them.
 
 **Skip:** lock-manager internals, implementing two-phase commit.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. PostgreSQL docs, chapter "Concurrency Control" (MVCC, isolation levels, explicit locking): short and exact.
-  2. Martin Kleppmann's *Hermitage* project (github.com/ept/hermitage): ready-made two-session scripts that reproduce every isolation anomaly in Postgres. It *is* your exercise list.
-  3. CMU 15-445 lectures on concurrency control and two-phase locking (YouTube).
-- *Watch:* The CMU 15-445 concurrency-control lectures.
-- *Go further (optional):* Jepsen's "Consistency Models" map (jepsen.io/consistency) for the precise definitions.
+**Study path (free, in this order, ~8 h)**
+1. [PostgreSQL docs, "Concurrency Control: Introduction"](https://www.postgresql.org/docs/current/mvcc.html). *(15 min)*
+2. [PostgreSQL docs, "Transaction Isolation"](https://www.postgresql.org/docs/current/transaction-iso.html): the whole page (Read Committed, Repeatable Read, Serializable). *(1.5 h)*
+3. [PostgreSQL docs, "Explicit Locking"](https://www.postgresql.org/docs/current/explicit-locking.html): the sections "Row-Level Locks" and "Deadlocks". *(45 min)*
+4. [Hermitage](https://github.com/ept/hermitage): read the README, then run **every** test in [postgres.md](https://github.com/ept/hermitage/blob/master/postgres.md) in two `psql` windows. This doubles as your exercises 1-6. *(2-3 h)*
+5. Watch: [CMU 15-445 (Fall 2024)](https://www.youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq), **Lecture #16 "Concurrency Control Theory"** and **#19 "Multi-Version Concurrency Control"**; add #17 "Two-Phase Locking" if you have time. *(3-4.5 h)*
+
+*If something is still unclear:* [Jepsen, "Consistency Models"](https://jepsen.io/consistency): click Read Committed, Repeatable Read and Serializable on the map for precise definitions.
 
 **Practice**
 - **Setup:** Postgres, and **two `psql` terminals side by side**. That layout *is* the demo.
@@ -330,12 +327,13 @@ Ordered so that each tool only needs the ones before it.
 - Why restores must be tested, and why a replica isn't a backup.
 
 **Skip:** comparing backup tools in depth (pgBackRest, Barman and others): just name them.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. PostgreSQL docs, chapter "Backup and Restore" (SQL dump, file-system backup, continuous archiving and PITR).
-  2. GitLab, "Postmortem of database outage of January 31" (about.gitlab.com/blog, 2017): the story for your video.
-  3. The pgBackRest User Guide (pgbackrest.org), to see how a real backup tool organises this.
-- *Go further (optional):* Google SRE book chapter "Data Integrity: What You Read Is What You Wrote" (sre.google/books).
+**Study path (free, in this order, ~4 h)**
+1. [PostgreSQL docs, "Backup and Restore"](https://www.postgresql.org/docs/current/backup.html) (chapter intro), then ["SQL Dump"](https://www.postgresql.org/docs/current/backup-dump.html). *(45 min)*
+2. [PostgreSQL docs, "Continuous Archiving and Point-in-Time Recovery (PITR)"](https://www.postgresql.org/docs/current/continuous-archiving.html): the whole page. This is exercise 3. *(1.5 h)*
+3. [GitLab, "Postmortem of database outage of January 31"](https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/): the whole post. It's your video's story. *(30 min)*
+4. [Google SRE book, "Data Integrity: What You Read Is What You Wrote"](https://sre.google/sre-book/data-integrity/): the first half, up to the case studies. *(45 min)*
+
+*If something is still unclear:* [pgBackRest User Guide](https://pgbackrest.org/user-guide.html): skim the concepts section to see how a real backup tool organises full, differential and incremental backups.
 
 **Practice**
 - **Setup:** Postgres with the 5-million-row table from T4.
@@ -343,7 +341,7 @@ Ordered so that each tool only needs the ones before it.
   1. Take a `pg_dump`, drop the table, and restore it.
   2. Take a physical backup with `pg_basebackup`.
   3. Turn on WAL archiving, insert rows, run a deliberate `DELETE` with no `WHERE`, then do PITR to the minute before it.
-  4. Upload a backup to object storage (MinIO or any free tier) to make it off-site.
+  4. Upload a backup to object storage (Garage from T10, or any free tier) to make it off-site.
   5. Write a tiny script that restores the latest backup into a fresh container and counts rows: an automated restore test.
 - **Break it:** corrupt a backup file (truncate it) and try to restore it. That's why you test restores.
 - **Measure it:** backup and restore times for the table. That restore time *is* your RTO, a strong on-camera moment.
@@ -366,13 +364,16 @@ Ordered so that each tool only needs the ones before it.
 - Replication, Sentinel and Cluster at headline level. Hot keys and big keys.
 
 **Skip:** Redis Cluster slot internals; the Redlock debate (L1: know it exists and why it's contested).
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Redis docs (redis.io/docs): "Data types", "Persistence", "Key eviction" and "Pipelining". The official docs are very good.
-  2. Redis University (university.redis.io): free courses; start with the one on Redis data structures.
-  3. Redis docs, "Scripting with Lua" and "Transactions".
-- *Watch:* Redis's own YouTube channel, for short data-structure walkthroughs.
-- *Go further (optional):* The Redis command reference (redis.io/commands), which lists every command's time complexity. Great for the "why is `KEYS *` slow?" moment.
+**Study path (free, in this order, ~6 h)**
+1. [Redis docs, "Data types"](https://redis.io/docs/latest/develop/data-types/): the overview, then the sub-pages for Strings, Lists, Sets, Hashes and Sorted sets. *(2 h)*
+2. [Redis docs, "Transactions"](https://redis.io/docs/latest/develop/using-commands/transactions/) (`MULTI`/`EXEC`/`WATCH`). *(30 min)*
+3. [Redis docs, "Scripting with Lua"](https://redis.io/docs/latest/develop/programmability/eval-intro/): this is exercise 6. *(45 min)*
+4. [Redis docs, "Redis pipelining"](https://redis.io/docs/latest/develop/using-commands/pipelining/). *(20 min)*
+5. [Redis docs, "Persistence"](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/): RDB vs AOF and their trade-offs. *(45 min)*
+6. [Redis docs, "Key eviction"](https://redis.io/docs/latest/develop/reference/eviction/): `maxmemory` and the eviction policies. *(30 min)*
+7. [Redis docs, `KEYS` command](https://redis.io/docs/latest/commands/keys/): read the warning and the time complexity before the "break it" exercise. *(5 min)*
+
+*If something is still unclear:* [Redis command reference](https://redis.io/docs/latest/commands/): every command lists its time complexity, which helps you predict what's slow.
 
 **Practice**
 - **Setup:** Redis in Docker, plus `redis-cli`. Keep `MONITOR` running in a second terminal, which shows every command live and makes a great visual.
@@ -404,12 +405,13 @@ Ordered so that each tool only needs the ones before it.
 - What not to cache, or what to cache carefully.
 - HTTP cache headers (`Cache-Control`, `ETag`). CDN basics: edge, origin, cache key, purge.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. AWS Builders' Library, "Caching challenges and strategies".
-  2. MDN Web Docs, "HTTP caching" (Cache-Control, ETag, revalidation).
-  3. Cloudflare Learning Center, "What is a CDN?" and "What is caching?".
-- *Go further (optional):* "Scaling Memcache at Facebook" (USENIX NSDI 2013, free PDF): the section on leases explains stampede protection at huge scale.
+**Study path (free, in this order, ~4 h)**
+1. [AWS Builders' Library, "Caching challenges and strategies"](https://builder.aws.com/content/3K9TeXp6strMiJ4vhakpRD7BQWO/caching-challenges-and-strategies): the whole article. *(1 h)*
+2. [Azure Architecture Center, "Cache-Aside pattern"](https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside). *(20 min)*
+3. [MDN, "HTTP caching"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching): the whole page (`Cache-Control`, freshness, `ETag`/revalidation). *(1 h)*
+4. [Cloudflare, "What is a CDN?"](https://www.cloudflare.com/learning/cdn/what-is-a-cdn/) and ["What is caching?"](https://www.cloudflare.com/learning/cdn/what-is-caching/). *(30 min)*
+
+*If something is still unclear:* ["Scaling Memcache at Facebook" (NSDI 2013, PDF)](https://www.usenix.org/system/files/conference/nsdi13/nsdi13-final170_update.pdf): Section 3.2 "Reducing Load", the part on leases (stampede protection at huge scale).
 
 **Practice**
 - **Setup:** the lab app + Postgres + Redis. Make `GET /items/:id` artificially slow (`pg_sleep(0.2)`).
@@ -435,12 +437,17 @@ Ordered so that each tool only needs the ones before it.
 - Password hashing (bcrypt/argon2) at headline level.
 - OAuth/OIDC at L1 ("Login with Google" exists, and roughly how it works).
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. *The Copenhagen Book* (thecopenhagenbook.com): a free, practical guide to sessions, password hashing, OTP and email verification. This alone is nearly enough.
-  2. OWASP Cheat Sheet Series (cheatsheetseries.owasp.org): "Session Management", "Authentication" and "Password Storage".
-  3. MDN Web Docs, "Using HTTP cookies".
-- *Go further (optional):* The jwt.io introduction to JSON Web Tokens; OWASP "Multifactor Authentication" cheat sheet for OTP rules.
+**Study path (free, in this order, ~4 h)**
+1. [The Copenhagen Book, "Sessions"](https://copenhagen.pilcrowonpaper.com/sessions). *(45 min)*
+2. [The Copenhagen Book, "Server-side tokens"](https://copenhagen.pilcrowonpaper.com/server-side-tokens). *(20 min)*
+3. [The Copenhagen Book, "Password authentication"](https://copenhagen.pilcrowonpaper.com/password-authentication). *(30 min)*
+4. [The Copenhagen Book, "Generating random values"](https://copenhagen.pilcrowonpaper.com/random-values): how to generate OTP codes safely. *(15 min)*
+5. [The Copenhagen Book, "Multi-factor authentication (MFA)"](https://copenhagen.pilcrowonpaper.com/mfa): OTP and TOTP. *(30 min)*
+6. [MDN, "Using HTTP cookies"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies): especially the section on security attributes. *(30 min)*
+7. [OWASP, "Session Management Cheat Sheet"](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html): the cookie attributes and session expiration sections. *(45 min)*
+8. [jwt.io, "Introduction to JSON Web Tokens"](https://www.jwt.io/introduction). *(15 min)*
+
+*If something is still unclear:* [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html); [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).
 
 **Practice**
 - **Setup:** the lab app behind Nginx with 2 instances (reuse T3).
@@ -466,21 +473,21 @@ Ordered so that each tool only needs the ones before it.
 - A CDN in front of storage, storage classes and cost maths.
 
 **Skip:** erasure-coding internals (L1).
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. AWS S3 User Guide: "Uploading objects with presigned URLs" and "Uploading and copying objects using multipart upload" (docs.aws.amazon.com). They apply to MinIO too.
-  2. The MinIO docs (min.io/docs): quickstart, `mc` client, bucket notifications.
-  3. The tus resumable upload protocol (tus.io/protocols/resumable-upload): short and readable.
-- *Go further (optional):* Cloudflare Learning Center, "What is object storage?".
+**Study path (free, in this order, ~3 h)**
+1. [Cloudflare, "What is object storage?"](https://www.cloudflare.com/learning/cloud/what-is-object-storage/). *(15 min)*
+2. [AWS S3 docs, "Uploading objects with presigned URLs"](https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html). *(30 min)*
+3. [AWS S3 docs, "Uploading and copying objects using multipart upload"](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html). *(45 min)*
+4. [tus, "Resumable upload protocol"](https://tus.io/protocols/resumable-upload): the "Core Protocol" section. *(45 min)*
+5. [Garage, "Quick start"](https://garagehq.deuxfleurs.fr/documentation/quick-start/) to set up your lab, and ["S3 compatibility status"](https://garagehq.deuxfleurs.fr/documentation/reference-manual/s3-compatibility/) to see which S3 features it supports. *(30 min)*
 
 **Practice**
-- **Setup:** MinIO in Docker (S3-compatible), plus the AWS CLI or `mc`.
+- **Setup:** Garage in Docker (a free, open-source S3-compatible server), plus the AWS CLI. MinIO's free edition is no longer maintained, so use Garage instead; everything you learn applies to S3 too.
 - **Exercises**
   1. Create a bucket and upload, list, download and delete objects.
   2. Generate a presigned PUT URL in the lab app and upload with `curl` or a small HTML page, so the file never touches your server.
   3. Upload a 1 GB file with multipart and look at the parts.
   4. Run a tus server (tusd) and resume an interrupted upload.
-  5. Set up MinIO bucket notifications and write a worker that makes a thumbnail with ImageMagick.
+  5. After an upload finishes, have the client call `POST /uploads/:id/complete`. The app then puts a job on a list in Redis, and a worker makes a thumbnail with ImageMagick.
 - **Break it:** upload a 1 GB file *through* the lab app instead and watch its memory and the timeouts. Cut the network halfway through a normal upload (`docker network disconnect`) and try to resume.
 - **Measure it:** upload time through the app vs a presigned direct upload; resume time vs starting from scratch.
 - **Ready to record when:** you can explain why presigned uploads take load off your servers, and how resumable uploads work in chunks.
@@ -497,12 +504,17 @@ Ordered so that each tool only needs the ones before it.
 - Keeping the index in sync with the database (dual writes vs CDC), and accepting that search is slightly behind.
 
 **Skip:** cluster tuning and shard sizing beyond headline level.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. *Introduction to Information Retrieval* by Manning, Raghavan and Schütze (free at nlp.stanford.edu/IR-book): Chapters 1-2 (inverted index, tokenisation) and 6 (scoring). The theory behind every search engine.
-  2. The OpenSearch docs (opensearch.org/docs): "Getting started", "Text analysis", "Query DSL".
-  3. PostgreSQL docs, chapter "Full Text Search".
-- *Go further (optional):* *Elasticsearch: The Definitive Guide* (free on elastic.co, written for an old version but the concepts are still the best explained); the Elastic docs on the `edge_ngram` tokenizer.
+**Study path (free, in this order, ~8 h)**
+1. [*Introduction to Information Retrieval*, Ch. 1 "Boolean retrieval" (PDF)](https://nlp.stanford.edu/IR-book/pdf/01bool.pdf): Sections 1.1-1.3 (building an inverted index and processing queries with it). *(1.5 h)*
+2. [Same book, Ch. 2 "The term vocabulary and postings lists" (PDF)](https://nlp.stanford.edu/IR-book/pdf/02voc.pdf): Section 2.2 (tokenisation, stop words, normalisation, stemming). *(1 h)*
+3. [Same book, Ch. 6 "Scoring, term weighting and the vector space model" (PDF)](https://nlp.stanford.edu/IR-book/pdf/06vect.pdf): Section 6.2 (tf-idf). *(45 min)*
+4. [OpenSearch, "Getting started"](https://docs.opensearch.org/latest/getting-started/): every page in this section. *(1 h)*
+5. [OpenSearch, "Text analysis"](https://docs.opensearch.org/latest/analyzers/). *(1 h)*
+6. [OpenSearch, "Query DSL"](https://docs.opensearch.org/latest/query-dsl/): the full-text queries (`match`, `match_phrase`, `multi_match`), fuzziness, and bool filters. *(1 h)*
+7. [Elasticsearch, "Edge n-gram tokenizer"](https://www.elastic.co/docs/reference/text-analysis/analysis-edgengram-tokenizer): the autocomplete example. OpenSearch has the same tokenizer. *(20 min)*
+8. [PostgreSQL docs, "Full Text Search"](https://www.postgresql.org/docs/current/textsearch.html): the sections "Introduction" and "Tables and Indexes". *(45 min)*
+
+*If something is still unclear:* [*Elasticsearch: The Definitive Guide*](https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html): written for an old version, but its "Search in Depth" and relevance chapters still explain the concepts better than anything else.
 
 **Practice**
 - **Setup:** OpenSearch (or Elasticsearch) plus Dashboards in Docker. Download a free product or movie dataset (Kaggle has plenty) of about 100,000 rows.
@@ -533,12 +545,14 @@ Ordered so that each tool only needs the ones before it.
 - Queue depth and consumer lag as the metrics to watch.
 
 **Skip:** AMQP exchange types beyond direct, fanout and topic.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. RabbitMQ tutorials 1-6 (rabbitmq.com/tutorials), in your language.
-  2. RabbitMQ docs: "Consumer Acknowledgements and Publisher Confirms", "Dead Letter Exchanges", "Consumer Prefetch".
-  3. AWS SQS Developer Guide, "Visibility timeout" and "Dead-letter queues": the same ideas in a different product.
-- *Go further (optional):* The CloudAMQP blog series "RabbitMQ for beginners"; Kleppmann's Cambridge lecture notes on messaging (see the cross-cutting list).
+**Study path (free, in this order, ~5 h)**
+1. [RabbitMQ Tutorials](https://www.rabbitmq.com/tutorials): tutorials 1-6, in your language. They're also your exercises 1-4. *(3 h)*
+2. [RabbitMQ, "Consumer Acknowledgements and Publisher Confirms"](https://www.rabbitmq.com/docs/confirms): the consumer-acknowledgement half. *(45 min)*
+3. [RabbitMQ, "Consumer Prefetch"](https://www.rabbitmq.com/docs/consumer-prefetch). *(15 min)*
+4. [RabbitMQ, "Dead Letter Exchanges"](https://www.rabbitmq.com/docs/dlx). *(30 min)*
+5. [AWS SQS, "Visibility timeout"](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html): the same redelivery idea in a different product. *(20 min)*
+
+*If something is still unclear:* [CloudAMQP, "RabbitMQ for beginners"](https://www.cloudamqp.com/blog/part1-rabbitmq-for-beginners-what-is-rabbitmq/).
 
 **Practice**
 - **Setup:** RabbitMQ with the management UI in Docker. The UI's queue graphs are perfect video visuals.
@@ -566,13 +580,13 @@ Ordered so that each tool only needs the ones before it.
 - When *not* to use Kafka.
 
 **Skip:** broker internals, ISR tuning, Kafka Streams.
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Apache Kafka docs, "Introduction" and "Design" (kafka.apache.org/documentation).
-  2. Confluent Developer, the free "Apache Kafka 101" course (developer.confluent.io).
-  3. Jay Kreps, "The Log: What every software engineer should know about real-time data's unifying abstraction" (LinkedIn Engineering, 2013).
-- *Watch:* The short videos in Confluent's Kafka 101 course.
-- *Go further (optional):* The Redpanda docs (docs.redpanda.com) if you use Redpanda for the lab.
+**Study path (free, in this order, ~5 h)**
+1. [Apache Kafka, "Introduction"](https://kafka.apache.org/intro/). *(30 min)*
+2. [Confluent Developer, "Apache Kafka 101" course](https://developer.confluent.io/courses/apache-kafka/events/): all modules (short videos plus text). *(2 h)*
+3. [Jay Kreps, "The Log: What every software engineer should know about real-time data's unifying abstraction"](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying): Part One "What Is a Log?" and Part Two "Data Integration". *(1.5 h)*
+4. [Apache Kafka docs, "Design"](https://kafka.apache.org/documentation/#design): "Persistence", "The Consumer" and "Message Delivery Semantics". *(1 h)*
+
+*If something is still unclear:* if you use Redpanda for the lab, the [Redpanda docs](https://docs.redpanda.com/home/) quick start.
 
 **Practice**
 - **Setup:** Redpanda (simpler) or Kafka in KRaft mode in Docker, plus a UI (Redpanda Console or Kafka UI).
@@ -597,12 +611,11 @@ Ordered so that each tool only needs the ones before it.
 - Delayed and scheduled jobs with Redis sorted sets.
 - Making jobs idempotent.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Martin Kleppmann, "How to do distributed locking" (martin.kleppmann.com, 2016): fencing tokens, clearly explained.
-  2. Redis docs, "Distributed Locks with Redis".
-  3. crontab.guru, for cron syntax.
-- *Go further (optional):* PostgreSQL docs on `SELECT ... FOR UPDATE SKIP LOCKED` (the "Locking Clause" section of the `SELECT` page), which is how many job queues run on Postgres.
+**Study path (free, in this order, ~2 h)**
+1. [Martin Kleppmann, "How to do distributed locking"](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html): the whole post. Fencing tokens are the key idea. *(45 min)*
+2. [Redis docs, "Distributed Locks with Redis"](https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/): the single-instance section. *(30 min)*
+3. [crontab.guru](https://crontab.guru/): play with cron expressions. *(10 min)*
+4. [PostgreSQL docs, `SELECT`, "The Locking Clause"](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE): `FOR UPDATE SKIP LOCKED`, which is how many job queues run on Postgres. *(20 min)*
 
 **Practice**
 - **Setup:** 3 lab-app containers + Redis + Postgres.
@@ -628,12 +641,14 @@ Ordered so that each tool only needs the ones before it.
 - Reconciliation and refunds.
 
 **Skip:** card-network internals, PCI DSS details (L1).
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Stripe blog, "Designing robust and predictable APIs with idempotency" (stripe.com/blog/idempotency, 2017).
-  2. Brandur Leach, "Implementing Stripe-like Idempotency Keys in Postgres" (brandur.org/idempotency-keys): a complete, practical implementation. Your exercise 3 in detail.
-  3. Stripe docs, "Idempotent requests" and "Webhooks" (signatures, retries, ordering).
-- *Go further (optional):* The IETF draft "The Idempotency-Key HTTP Header Field"; the bKash developer portal and SSLCommerz developer docs for local gateway flows.
+**Study path (free, in this order, ~4.5 h)**
+1. [Stripe, "Designing robust and predictable APIs with idempotency"](https://stripe.com/blog/idempotency). *(30 min)*
+2. [Brandur Leach, "Implementing Stripe-like Idempotency Keys in Postgres"](https://brandur.org/idempotency-keys): the whole post. It's exercise 3 in full detail. *(1.5 h)*
+3. [Stripe API docs, "Idempotent requests"](https://docs.stripe.com/api/idempotent_requests). *(10 min)*
+4. [Stripe docs, "Webhooks"](https://docs.stripe.com/webhooks): signature verification, retries, duplicate events and event ordering. *(1 h)*
+5. A local gateway's flow: the [bKash developer portal](https://developer.bka.sh/) (Checkout / Tokenized checkout) or the [SSLCommerz developer docs](https://developer.sslcommerz.com/) (payment flow and IPN). *(1 h)*
+
+*If something is still unclear:* [IETF draft, "The Idempotency-Key HTTP Header Field"](https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/).
 
 **Practice**
 - **Setup:** a sandbox or test-mode account (Stripe test mode is the easiest to start with; also try bKash or SSLCommerz sandbox), the lab app, and a tunnel (ngrok or cloudflared) so webhooks can reach your laptop.
@@ -662,13 +677,13 @@ Ordered so that each tool only needs the ones before it.
 - Failover, split brain, and why automatic failover is hard.
 - Read scaling, and why a replica isn't a backup.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. PostgreSQL docs, chapter "High Availability, Load Balancing, and Replication".
-  2. Martin Kleppmann's Cambridge *Distributed Systems* lectures (YouTube) and free lecture notes (PDF on his website): the parts on replication.
-  3. GitHub, "October 21 post-incident analysis" (github.blog, 2018): a real failover and split-brain-style story.
-- *Watch:* Kleppmann's replication lectures.
-- *Go further (optional):* The Patroni docs (patroni.readthedocs.io), to see how automatic failover is done in practice.
+**Study path (free, in this order, ~5 h)**
+1. Watch: [Kleppmann, *Distributed Systems*](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB), **lectures 5.1 "Replication"** and **5.2 "Quorums"**. The [lecture notes (PDF)](https://www.cl.cam.ac.uk/teaching/2122/ConcDisSys/dist-sys-notes.pdf) cover the same material in Section 5. *(1 h)*
+2. [PostgreSQL docs, "High Availability, Load Balancing, and Replication"](https://www.postgresql.org/docs/current/high-availability.html): the intro and the comparison of solutions. *(45 min)*
+3. [PostgreSQL docs, "Log-Shipping Standby Servers"](https://www.postgresql.org/docs/current/warm-standby.html): "Streaming Replication", "Synchronous Replication" and the failover section. This is your lab guide. *(1.5 h)*
+4. [GitHub, "October 21 post-incident analysis"](https://github.blog/news-insights/company-news/oct21-post-incident-analysis/): a real failover across data centres going wrong. *(45 min)*
+
+*If something is still unclear:* [Patroni docs](https://patroni.readthedocs.io/en/latest/), to see how automatic failover is done in practice.
 
 **Practice**
 - **Setup:** a Postgres primary + 2 streaming replicas in docker compose. Use the Bitnami images if you want this easy, or set it up by hand for depth (recommended).
@@ -692,13 +707,14 @@ Ordered so that each tool only needs the ones before it.
 - Cross-shard queries and joins, and why resharding is painful.
 - Consistent hashing with virtual nodes; directory-based sharding.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. The Amazon Dynamo paper (2007, free at allthingsdistributed.com): Section 4 on partitioning and consistent hashing with virtual nodes.
-  2. Notion, "Herding elephants: lessons learned from sharding Postgres at Notion" (notion.com/blog, 2021).
-  3. PostgreSQL docs, chapter "Table Partitioning".
-- *Watch:* The MIT 6.5840 *Distributed Systems* lectures on sharded key/value stores (free on YouTube and the course site).
-- *Go further (optional):* Tom White, "Consistent Hashing" (2007 blog post), short with diagrams; Instagram Engineering, "Sharding & IDs at Instagram"; the Citus docs.
+**Study path (free, in this order, ~4.5 h)**
+1. [PostgreSQL docs, "Table Partitioning"](https://www.postgresql.org/docs/current/ddl-partitioning.html): "Overview", "Declarative Partitioning" and "Partition Pruning". This is exercise 1. *(1 h)*
+2. [The Amazon Dynamo paper (PDF)](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf): Section 4.2 "Partitioning Algorithm" and 4.3 "Replication" (consistent hashing with virtual nodes). *(1 h)*
+3. [Tom White, "Consistent Hashing"](https://tom-e-white.com/2007/11/consistent-hashing.html): short, with diagrams and code. *(20 min)*
+4. [Notion, "Herding elephants: Lessons learned from sharding Postgres at Notion"](https://www.notion.com/blog/sharding-postgres-at-notion). *(45 min)*
+5. [Instagram Engineering, "Sharding & IDs at Instagram"](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c): the sharding part. *(20 min)*
+
+*If something is still unclear:* [Citus docs](https://docs.citusdata.com/) for the optional lab; the [MIT 6.5840 schedule](https://pdos.csail.mit.edu/6.824/schedule.html) for its lectures on sharded key/value systems.
 
 **Practice**
 - **Setup:** Python (or your language), plus 3 Postgres containers.
@@ -724,11 +740,11 @@ Ordered so that each tool only needs the ones before it.
 - Ticket servers and ID ranges.
 - Base62 encoding for short codes, and why guessable IDs are a security risk.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Twitter Engineering, "Announcing Snowflake" (2010), and the original `twitter-archive/snowflake` repo README on GitHub.
-  2. Instagram Engineering, "Sharding & IDs at Instagram" (2012): IDs generated inside Postgres.
-  3. RFC 9562, *Universally Unique IDentifiers (UUIDs)* (2024): the sections on UUID v4 and v7.
+**Study path (free, in this order, ~1.5 h)**
+1. [Twitter, "Announcing Snowflake" (2010)](https://blog.x.com/engineering/en_us/a/2010/announcing-snowflake). *(10 min)*
+2. [Snowflake README, 2010 version](https://github.com/twitter-archive/snowflake/tree/snowflake-2010): the ID layout (timestamp, worker, sequence). *(15 min)*
+3. [Instagram Engineering, "Sharding & IDs at Instagram"](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c): the ID part (41 bits time, 13 bits shard, 10 bits sequence). *(20 min)*
+4. [RFC 9562, *UUIDs*](https://www.rfc-editor.org/rfc/rfc9562): Section 5.4 (UUIDv4) and Section 5.7 (UUIDv7). *(45 min)*
 
 **Practice**
 - **Setup:** Postgres and a script.
@@ -751,13 +767,13 @@ Ordered so that each tool only needs the ones before it.
 - Quorums (N, R, W).
 - Choosing consistency per feature: a bank balance needs strong consistency; a view counter can be eventual.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Martin Kleppmann, "Please stop calling databases CP or AP" (martin.kleppmann.com, 2015).
-  2. Martin Kleppmann's Cambridge lectures and notes: the parts on consistency, quorums and linearizability.
-  3. Jepsen, "Consistency Models" (jepsen.io/consistency): one page per model with clear definitions.
-- *Watch:* Kleppmann's Cambridge consistency lectures.
-- *Go further (optional):* Eric Brewer, "CAP Twelve Years Later: How the 'Rules' Have Changed" (InfoQ, 2012); Werner Vogels, "Eventually Consistent – Revisited" (allthingsdistributed.com, 2008); the Cassandra docs on consistency levels for your lab.
+**Study path (free, in this order, ~5.5 h)**
+1. Watch: [Kleppmann, *Distributed Systems*](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB), **lectures 7.2 "Linearizability"** and **7.3 "Eventual consistency"** (and 5.2 "Quorums" if you skipped it in T16). Notes: Section 7 of the [PDF](https://www.cl.cam.ac.uk/teaching/2122/ConcDisSys/dist-sys-notes.pdf). *(1.5 h)*
+2. [Martin Kleppmann, "Please stop calling databases CP or AP"](https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html). *(45 min)*
+3. [Jepsen, "Consistency Models"](https://jepsen.io/consistency): the map, then the pages for Linearizable, Sequential, Causal, Read Your Writes and Monotonic Reads. *(1 h)*
+4. [Eric Brewer, "CAP Twelve Years Later: How the 'Rules' Have Changed"](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/). *(45 min)*
+5. [Werner Vogels, "Eventually Consistent – Revisited"](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html). *(30 min)*
+6. For the lab: [Cassandra docs, "Dynamo"](https://cassandra.apache.org/doc/latest/cassandra/architecture/dynamo.html): the section on tunable consistency. *(30 min)*
 
 **Practice**
 - **Setup:** paper, plus Docker for a small multi-node database (a 3-node Cassandra or ScyllaDB cluster).
@@ -784,12 +800,13 @@ Ordered so that each tool only needs the ones before it.
 - `429` and `Retry-After`; returning limit headers.
 - Abuse defences beyond limits: CAPTCHA, making abuse expensive.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Stripe blog, "Scaling your API with rate limiters" (2017), with its linked code samples.
-  2. Cloudflare blog, "How we built rate limiting capable of scaling to millions of domains" (2017): the sliding-window counter.
-  3. Nginx docs, `ngx_http_limit_req_module` (burst and nodelay explained).
-- *Go further (optional):* The Redis docs tutorial on rate limiting; IETF draft "RateLimit header fields for HTTP".
+**Study path (free, in this order, ~2.5 h)**
+1. [Stripe, "Scaling your API with rate limiters"](https://stripe.com/blog/rate-limiters). *(30 min)*
+2. [Cloudflare, "How we built rate limiting capable of scaling to millions of domains"](https://blog.cloudflare.com/counting-things-a-lot-of-different-things/): the sliding-window counter, explained with numbers. *(45 min)*
+3. [Azure Architecture Center, "Rate Limiting pattern"](https://learn.microsoft.com/en-us/azure/architecture/patterns/rate-limiting-pattern). *(20 min)*
+4. [Nginx, `ngx_http_limit_req_module`](https://nginx.org/en/docs/http/ngx_http_limit_req_module.html): `limit_req_zone`, `burst`, `nodelay`. This is exercise 5. *(20 min)*
+
+*If something is still unclear:* [IETF draft, "RateLimit header fields for HTTP"](https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/), for exercise 6.
 
 **Practice**
 - **Setup:** the lab app + Redis + Nginx, plus k6.
@@ -814,12 +831,13 @@ Ordered so that each tool only needs the ones before it.
 - Exponential backoff with jitter, retry budgets, retry storms.
 - Circuit breaker states (closed / open / half-open), bulkheads, fallbacks, load shedding.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. AWS Builders' Library, "Timeouts, retries, and backoff with jitter" and "Using load shedding to avoid overload".
-  2. Microsoft Azure Architecture Center: the "Retry", "Circuit Breaker" and "Bulkhead" pattern pages (learn.microsoft.com). Free, short, and very clear.
-  3. Martin Fowler, "CircuitBreaker" (martinfowler.com).
-- *Go further (optional):* Marc Brooker, "Exponential Backoff And Jitter" (AWS Architecture Blog, 2015), with the simulation charts; the Toxiproxy README on GitHub.
+**Study path (free, in this order, ~4 h)**
+1. [AWS Builders' Library, "Timeouts, retries, and backoff with jitter"](https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter). *(45 min)*
+2. [Marc Brooker, "Exponential Backoff And Jitter"](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/): the simulation charts are great for your video. *(20 min)*
+3. Azure Architecture Center: ["Retry pattern"](https://learn.microsoft.com/en-us/azure/architecture/patterns/retry), ["Circuit Breaker pattern"](https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker) and ["Bulkhead pattern"](https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead). *(1.5 h)*
+4. [Martin Fowler, "CircuitBreaker"](https://martinfowler.com/bliki/CircuitBreaker.html). *(20 min)*
+5. [AWS Builders' Library, "Using load shedding to avoid overload"](https://builder.aws.com/content/3Eun1EEyX6p2e3VYNyRLSJzLuMV/using-load-shedding-to-avoid-overload). *(45 min)*
+6. For the lab: the [Toxiproxy README](https://github.com/Shopify/toxiproxy). *(15 min)*
 
 **Practice**
 - **Setup:** two copies of the lab app (A calls B), with **Toxiproxy** between them to inject latency and errors, plus k6.
@@ -844,13 +862,15 @@ Ordered so that each tool only needs the ones before it.
 - SLIs, SLOs and error budgets; alerting on symptoms, not causes.
 - Distributed tracing at headline level (OpenTelemetry).
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Google *SRE book* (free at sre.google/books): Chapters "Service Level Objectives" and "Monitoring Distributed Systems"; *SRE Workbook*: "Implementing SLOs" and "Alerting on SLOs".
-  2. Prometheus docs, "Getting started" and "Histograms and summaries" (prometheus.io/docs).
-  3. Tom Wilkie, "The RED Method: How to instrument your services" (grafana.com/blog, 2018) and Brendan Gregg, "The USE Method" (brendangregg.com).
-- *Watch:* Gil Tene, "How NOT to Measure Latency" (conference talk on YouTube). It's the source of the "averages lie" lesson.
-- *Go further (optional):* The OpenTelemetry docs "Getting started" for your language; the Grafana docs on dashboards.
+**Study path (free, in this order, ~6 h)**
+1. [Google SRE book, Ch. 4 "Service Level Objectives"](https://sre.google/sre-book/service-level-objectives/). *(45 min)*
+2. [Google SRE book, Ch. 6 "Monitoring Distributed Systems"](https://sre.google/sre-book/monitoring-distributed-systems/): especially "The Four Golden Signals". *(45 min)*
+3. [SRE Workbook, "Implementing SLOs"](https://sre.google/workbook/implementing-slos/) and ["Alerting on SLOs"](https://sre.google/workbook/alerting-on-slos/). *(1.5 h)*
+4. [Grafana, "The RED Method: How to instrument your services"](https://grafana.com/blog/the-red-method-how-to-instrument-your-services/) and [Brendan Gregg, "The USE Method"](https://www.brendangregg.com/usemethod.html). *(40 min)*
+5. Watch: [Gil Tene, "How NOT to Measure Latency" (Strange Loop)](https://www.youtube.com/watch?v=lJ8ydIuPFeU): the source of the "averages lie" lesson. *(45 min)*
+6. [Prometheus, "Getting started"](https://prometheus.io/docs/prometheus/latest/getting_started/) and ["Histograms and summaries"](https://prometheus.io/docs/practices/histograms/). *(1.25 h)*
+
+*If something is still unclear:* [OpenTelemetry, "Getting started"](https://opentelemetry.io/docs/getting-started/) for the optional tracing exercise.
 
 **Practice**
 - **Setup:** Prometheus + Grafana in Docker; add a metrics endpoint to the lab app (every language has a Prometheus client). *Optional:* Jaeger for traces.
@@ -876,12 +896,15 @@ Ordered so that each tool only needs the ones before it.
 - **Expand/contract database migrations**, such as renaming a column without downtime.
 - Rollbacks, and the stages of a CI/CD pipeline.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Docker docs, "Get started" and "Multi-stage builds" (docs.docker.com).
-  2. Kubernetes docs, the "Kubernetes Basics" tutorial and "Configure Liveness, Readiness and Startup Probes" (kubernetes.io).
-  3. martinfowler.com: "BlueGreenDeployment", "CanaryRelease", "ParallelChange" (expand/contract) and Pete Hodgson's "Feature Toggles".
-- *Go further (optional):* Stripe blog, "Online migrations at scale" (2017): a real expand/contract migration on huge tables; the kind quick start (kind.sigs.k8s.io).
+**Study path (free, in this order, ~6.5 h)**
+1. [Docker docs, "Get started"](https://docs.docker.com/get-started/). *(1.5 h)*
+2. [Docker docs, "Multi-stage builds"](https://docs.docker.com/build/building/multi-stage/): this is exercise 1. *(20 min)*
+3. [kind, "Quick Start"](https://kind.sigs.k8s.io/docs/user/quick-start/): to set up your local cluster. *(20 min)*
+4. [Kubernetes, "Learn Kubernetes Basics"](https://kubernetes.io/docs/tutorials/kubernetes-basics/): all modules, ending with ["Performing a Rolling Update"](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/). *(2 h)*
+5. [Kubernetes, "Configure Liveness, Readiness and Startup Probes"](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/). *(30 min)*
+6. Martin Fowler: ["BlueGreenDeployment"](https://martinfowler.com/bliki/BlueGreenDeployment.html), ["CanaryRelease"](https://martinfowler.com/bliki/CanaryRelease.html), ["ParallelChange"](https://martinfowler.com/bliki/ParallelChange.html) (expand/contract). *(45 min)*
+7. [Pete Hodgson, "Feature Toggles (aka Feature Flags)"](https://martinfowler.com/articles/feature-toggles.html): up to and including "Categories of toggles". *(45 min)*
+8. [Stripe, "Online migrations at scale"](https://stripe.com/blog/online-migrations): a real expand/contract migration. *(30 min)*
 
 **Practice**
 - **Setup:** **kind** (Kubernetes in Docker) or minikube, the lab app image, and a k6 test running the whole time.
@@ -912,13 +935,14 @@ Ordered so that each tool only needs the ones before it.
 - Sagas (orchestration vs choreography) and compensating actions.
 - The dual-write problem, the transactional outbox, and CDC (Debezium).
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. microservices.io by Chris Richardson: the "Saga", "Transactional outbox" and "Database per service" pattern pages.
-  2. martinfowler.com: "Microservices", "MonolithFirst" and "Microservice Prerequisites".
-  3. The Debezium tutorial and the "Outbox Event Router" docs (debezium.io/documentation).
-- *Watch:* Caitie McCaffrey, "Applying the Saga Pattern" (GOTO conference talk on YouTube).
-- *Go further (optional):* Microsoft Azure Architecture Center, "Saga distributed transactions pattern".
+**Study path (free, in this order, ~5 h)**
+1. Martin Fowler: ["MonolithFirst"](https://martinfowler.com/bliki/MonolithFirst.html) and ["MicroservicePrerequisites"](https://martinfowler.com/bliki/MicroservicePrerequisites.html). *(20 min)*
+2. [James Lewis and Martin Fowler, "Microservices"](https://martinfowler.com/articles/microservices.html). *(1 h)*
+3. microservices.io: ["Database per service"](https://microservices.io/patterns/data/database-per-service.html), ["Saga"](https://microservices.io/patterns/data/saga.html) and ["Transactional outbox"](https://microservices.io/patterns/data/transactional-outbox.html). *(1 h)*
+4. Watch: [Caitie McCaffrey, "Applying the Saga Pattern" (GOTO 2015)](https://www.youtube.com/watch?v=xDuwrtwYHu8). *(45 min)*
+5. [Debezium, "Tutorial"](https://debezium.io/documentation/reference/stable/tutorial.html), then ["Outbox Event Router"](https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html): your lab guide for exercise 5. *(2 h)*
+
+*If something is still unclear:* [Azure Architecture Center, "Saga distributed transactions pattern"](https://learn.microsoft.com/en-us/azure/architecture/patterns/saga).
 
 **Practice**
 - **Setup:** two tiny services (for example "orders" and "inventory"), each with its own Postgres, plus RabbitMQ. Later add Kafka + Debezium.
@@ -942,13 +966,11 @@ Ordered so that each tool only needs the ones before it.
 - Scaling across servers with a pub/sub backplane.
 - Heartbeats, reconnects with backoff, delivery acks and receipts, flaky mobile networks.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. javascript.info: the chapters "Long polling", "WebSocket" and "Server Sent Events". Short, with working code.
-  2. MDN Web Docs, "The WebSocket API" and "Using server-sent events".
-  3. Discord blog, "How Discord Scaled Elixir to 5,000,000 Concurrent Users" (2017): a real story for the video.
-- *Watch:* Hussein Nasser's videos on WebSockets, SSE and long polling.
-- *Go further (optional):* The Nginx docs page "WebSocket proxying".
+**Study path (free, in this order, ~3 h)**
+1. javascript.info: ["Long polling"](https://javascript.info/long-polling), ["WebSocket"](https://javascript.info/websocket) and ["Server Sent Events"](https://javascript.info/server-sent-events). Short, with working code. *(1.5 h)*
+2. MDN: ["The WebSocket API"](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) and ["Using server-sent events"](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events). *(45 min)*
+3. [Nginx, "WebSocket proxying"](https://nginx.org/en/docs/http/websocket.html). *(10 min)*
+4. [Discord, "How Discord Scaled Elixir to 5,000,000 Concurrent Users"](https://discord.com/blog/how-discord-scaled-elixir-to-5-000-000-concurrent-users). *(30 min)*
 
 **Practice**
 - **Setup:** the lab app with a WebSocket endpoint, 2 instances behind Nginx (with WebSocket proxying configured), plus Redis.
@@ -974,12 +996,13 @@ Ordered so that each tool only needs the ones before it.
 - Redis GEO vs PostGIS.
 - The cost of moving objects that update their location every few seconds.
 
-**Learn from (all free)**
-- *Core, enough on its own:*
-  1. Redis docs, the geospatial data type and `GEOSEARCH`.
-  2. The PostGIS workshop "Introduction to PostGIS" (postgis.net/workshops): the chapters on geometries, spatial indexing and nearest-neighbour search.
-  3. Uber Engineering, "H3: Uber's Hexagonal Hierarchical Spatial Index" (2018), plus the docs at h3geo.org.
-- *Go further (optional):* The Wikipedia article "Geohash" (good diagrams of the encoding); the S2 Geometry docs (s2geometry.io) for the headline idea.
+**Study path (free, in this order, ~4.5 h)**
+1. [Wikipedia, "Geohash"](https://en.wikipedia.org/wiki/Geohash): how the encoding works and its limitations for proximity searches (the edge problem). *(45 min)*
+2. [Redis docs, "Redis geospatial"](https://redis.io/docs/latest/develop/data-types/geospatial/). *(20 min)*
+3. PostGIS workshop: ["Geometries"](https://postgis.net/workshops/postgis-intro/geometries.html), ["Spatial Indexing"](https://postgis.net/workshops/postgis-intro/indexing.html) and ["Nearest-Neighbour Searching"](https://postgis.net/workshops/postgis-intro/knn.html). Set up with the [workshop intro](https://postgis.net/workshops/postgis-intro/). *(2 h)*
+4. [Uber, "H3: Uber's Hexagonal Hierarchical Spatial Index"](https://www.uber.com/blog/h3/), plus the [H3 docs introduction](https://h3geo.org/docs/). *(1 h)*
+
+*If something is still unclear:* [S2 Geometry](https://s2geometry.io/), for the headline idea of S2 cells.
 
 **Practice**
 - **Setup:** Redis + PostGIS (the `postgis/postgis` image), plus a geohash map viewer online.
