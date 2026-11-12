@@ -4,6 +4,8 @@
 
 Each topic is a situation real teams face: **"We have problem X. What's going on, and how do we fix it without breaking anything?"** Most of the video is the solution.
 
+**Rule for every topic: the problem and solution must be general.** They should apply whatever language, framework or cloud the viewer uses. The company is only the real-world example. If a story depends on deep knowledge of one technology (e.g. one language's garbage collector), it doesn't belong on this list.
+
 **Part A** has 29 topics built on **published case studies** from company engineering blogs, papers and conference talks, spread across 10 areas so the channel isn't only about databases. **Part B** has everyday scenarios from normal jobs that don't have one famous case study.
 
 > **How this list was researched:** Part A topics and facts come from web searches of engineering blogs, papers, conference talks and newsletters (Nov 2026). I worked from search excerpts and summaries, **not the full articles**. Before recording, read the original post (the first link in each topic) and take every number from it, not from this doc.
@@ -22,6 +24,101 @@ Each topic is a situation real teams face: **"We have problem X. What's going on
 | 8. Architecture | 2 |
 | 9. Codebase and team | 4 |
 | 10. Data and databases | 4 |
+
+---
+
+## Episode order: from the 1st video to the last
+
+All 44 topics plus one "patterns" episode, in recording order. The **ID** column points to the topic's details further down (e.g. `1.2` is in Part A, `B15` is in the Part B table).
+
+**How the order was chosen:**
+- **Start easy and relatable.** The first videos are problems almost every developer has hit (slow pages, timeouts), with 1-day prep, so you build a recording habit quickly.
+- **Each video builds on earlier ones.** Concepts introduced early (connection pools, queues, percentiles, staged rollout) come back later, so you can say "remember Episode 2?" The "Builds on" column gives you the callback line.
+- **Grouped into arcs of 5-10 videos** with a clear theme, so each playlist tells one story.
+- **Debate videos are spread out** (one every few episodes), because they bring comments.
+- **The two 2-day topics come later**, once you're faster at preparing.
+
+### Arc 1: "Why is it slow?" (performance)
+
+| Ep | ID | Title | Prep | Builds on |
+|---|---|---|---|---|
+| 1 | B15 | A page runs 1,200 queries (N+1) | 1 day | Starting point |
+| 2 | 1.2 | The database is almost idle, but the API keeps timing out | 1 day | Ep 1: slow queries hold connections |
+| 3 | 1.3 | A popular cache key expires and the database melts | 1 day | Ep 1-2: caching to reduce database load |
+| 4 | 1.1 | The average looks fine, but some users wait 2 seconds | 1 day | Ep 1-3: measuring slowness properly (percentiles) |
+| 5 | B1 | An endpoint got 10× slower after a release | 1 day | Ep 4: using percentiles to find a regression |
+| 6 | B2 | Memory keeps growing until the server restarts | 1 day | Ep 5: profiling, now for memory |
+
+### Arc 2: "When the load hits" (queues, limits, outages)
+
+| Ep | ID | Title | Prep | Builds on |
+|---|---|---|---|---|
+| 7 | B9 | The report button times out | 1 day | Ep 2: long requests hold resources, so move work to a queue |
+| 8 | 6.1 | Our job queue ran out of memory, and everything stopped | 1 day | Ep 7: what happens when the queue itself fails |
+| 9 | 7.2 | Some customers are flooding our API | 1 day | Ep 8: protecting the system with rate limits and load shedding |
+| 10 | 2.2 | Everyone came back from holiday and autoscaling made it worse | 1 day | Ep 9: when "add more servers" doesn't help |
+| 11 | 2.1 | One firewall rule took down the whole network | 1 day | Ep 10: outages caused by changes, which leads into Arc 3 |
+
+### Arc 3: "Changing things without breaking them" (safe changes)
+
+| Ep | ID | Title | Prep | Builds on |
+|---|---|---|---|---|
+| 12 | Patterns | The 6 patterns behind every safe change | 1 day | Ep 11: "every change needs a safe rollout". From here on, refer back to "pattern #N" |
+| 13 | B13 | Money stored as float | 1 day | Ep 12: pattern 1 (expand and contract) on a small, clear example |
+| 14 | B14 | All timestamps stored in local time | 1 day | Ep 13: same pattern, trickier data |
+| 15 | 10.4 | Change the schema of a huge table without locking it | 1 day | Ep 13-14: same idea on a billion-row table |
+| 16 | 10.1 | Split a huge table into a new one while the app is live | 1 day | Ep 15: pattern 2 (dual write) in full |
+| 17 | B10 | Switching payment providers | 1 day | Ep 12: pattern 4 (branch by abstraction) |
+| 18 | 7.1 | Change your API without breaking anyone | 1 day | Ep 13: expand and contract, applied to an API |
+| 19 | 7.3 | Replace the API behind a mobile app with no downtime | 1 day | Ep 18: pattern 5 (shadow comparison) and canaries |
+| 20 | 5.3 | Ship a risky change to an app installed on millions of devices | 1 day | Ep 19: pattern 6 (escape hatch) when you can't redeploy |
+| 21 | B5 | A crash shipped to the app store and you can't roll back | 1 day | Ep 20: staged rollouts and kill switches for mobile |
+
+### Arc 4: "Living with a big codebase" (code and team)
+
+| Ep | ID | Title | Prep | Builds on |
+|---|---|---|---|---|
+| 22 | 9.4 | 2,000 old feature flags nobody dares to remove | 1 day | Ep 20-21: the cost of all those flags |
+| 23 | B11 | Changing code that has no tests | 1 day | Ep 22: deleting and changing code safely |
+| 24 | 8.1 | Replace an old system piece by piece | 1 day | Ep 23 + patterns 3 and 5 at full scale |
+| 25 | 9.1 | Upgrade a core dependency years out of date | 1 day | Ep 24: incremental change without stopping features |
+| 26 | 9.2 | Big bang or step by step? Changing millions of lines (debate) | 1 day | Ep 24-25: when incremental is *not* the answer |
+| 27 | B12 | CI takes 45 minutes | 1 day | Ep 25-26: big changes need fast feedback |
+| 28 | 9.3 | One repo or many? (debate) | 1 day | Ep 27: repository structure affects builds and changes |
+| 29 | 8.2 | Microservices: in, and back out again (debate) | **2 days** | Ep 28: splitting code vs splitting services |
+
+### Arc 5: "Keeping users safe" (security)
+
+| Ep | ID | Title | Prep | Builds on |
+|---|---|---|---|---|
+| 30 | B7 | An API key was pushed to GitHub | 1 day | Starts the security arc with the most common mistake |
+| 31 | 4.2 | Our password hashing is weak. Fix it without forcing resets | 1 day | Ep 13: expand and contract, applied to passwords |
+| 32 | 4.1 | Make 2FA mandatory without locking users out | 1 day | Ep 20-21: a staged rollout, but for a security rule |
+| 33 | B6 | Add "Login with Google" / SSO to an existing app | 1 day | Ep 31-32: changing how users log in |
+| 34 | B8 | "Delete my data" across 30 services | 1 day | Ep 8 (events and queues) + Ep 29 (many services) |
+
+### Arc 6: "On the user's screen" (frontend, mobile, real-time)
+
+| Ep | ID | Title | Prep | Builds on |
+|---|---|---|---|---|
+| 35 | B4 | The web page takes 8 seconds on a phone | 1 day | Ep 4: percentiles, now measured in the browser |
+| 36 | 5.2 | Our mobile website is too slow for users on cheap phones | 1 day | Ep 35: a real company's full solution |
+| 37 | 5.1 | Why Airbnb stopped using React Native (debate) | 1 day | Ep 36: web vs native vs cross-platform |
+| 38 | 6.2 | One chat room with 30,000 people online | 1 day | Ep 8-9: queues and load, now with live connections |
+| 39 | 6.3 | Two people edit the same design at the same time | 1 day | Ep 38: real-time, plus conflicts |
+
+### Arc 7: "Growing up" (scale, infrastructure, reliability)
+
+| Ep | ID | Title | Prep | Builds on |
+|---|---|---|---|---|
+| 40 | 10.3 | Move trillions of messages to a new database with zero downtime | 1 day | Ep 16: dual writes at massive scale |
+| 41 | 10.2 | Our database is too big for one machine. Shard it | **2 days** | Ep 40: when one database isn't enough |
+| 42 | B3 | On-call gets 200 alerts a week | 1 day | Ep 10-11: running a big system day to day |
+| 43 | 2.3 | Break your own servers on purpose | 1 day | Ep 42: finding failures before users do |
+| 44 | 3.2 | Move half an exabyte off S3 without losing a file | 1 day | Ep 40: data migration with a way back |
+| 45 | 3.1 | Our cloud bill is too high. Should we leave the cloud? (debate) | 1 day | Ep 44: the money side. A good season finale, since the comments will argue |
+
+**Tip:** if a topic is too hard or doesn't interest you when its turn comes, swap it with the next one in the same arc. The arcs matter more than the exact order.
 
 ---
 
@@ -47,7 +144,7 @@ Each topic is a situation real teams face: **"We have problem X. What's going on
 
 ## The 6 patterns behind almost every safe change
 
-Many topics below, from database moves to API changes to language upgrades, reuse the same few ideas. Make **one early video about these patterns**, then refer back to them ("this is pattern #5 again").
+Many topics below, from database moves to API changes to language upgrades, reuse the same few ideas. This is **Episode 12**, the start of Arc 3. From then on, refer back to them ("this is pattern #5 again").
 
 1. **Expand and contract (parallel change):** add the new thing next to the old, move everyone over, then remove the old. ([Martin Fowler: Parallel Change](https://www.martinfowler.com/bliki/ParallelChange.html))
 2. **Dual write → backfill → compare → switch reads → stop old writes:** the standard way to move data. (Stripe, topic 10.1)
@@ -62,25 +159,28 @@ Many topics below, from database moves to API changes to language upgrades, reus
 
 ## 1. Performance
 
-**1.1 "Our service has latency spikes every 2 minutes" (Discord: Go → Rust)**
-- **Situation:** a fast service shows regular latency spikes, even though the code barely allocates memory.
-- **Real case:** Discord's "Read States" service (tracks which messages each user has read, so it's on the hot path) had spikes that looked like garbage collection. Reading Go's source, they found Go forced a GC run at least every 2 minutes. They rewrote the service in Rust, where evicted cache entries are freed immediately.
-- **What you teach:** how garbage collectors work, how to find the cause of periodic spikes, and when changing language is (and isn't) justified.
-- **Twist:** commenters noted the migration started on Go 1.9, and Go's GC improved a lot afterwards. Was rewriting right, or would upgrading Go have been enough? A good debate for comments.
-- **Read:** [Discord: Why Discord is switching from Go to Rust](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)
+**1.1 "The average response time looks fine, but some users wait 2 seconds" (tail latency)**
+- **Situation:** your dashboard says the average response is 80 ms, yet users complain the app is slow. One page calls 20 backend services, and it's only as fast as the slowest one.
+- **Real case:** Google's paper "The Tail at Scale" (Dean & Barroso, 2013) explains why rare slow responses become common when one request fans out to many servers, and gives techniques like **hedged requests**: if a reply hasn't arrived after the 95th-percentile time, send the same request to another replica and use whichever answers first. Summaries report a large drop in tail latency for only a few percent extra load.
+- **What you teach:** averages vs percentiles (p50, p95, p99), why fan-out multiplies slowness, timeouts, hedged requests, measuring what users feel.
+- **Twist:** hedging doubles work for slow requests. When can it make an overloaded system worse?
+- **Read:** "The Tail at Scale", Communications of the ACM, Feb 2013 (search the title for the PDF) · [The Morning Paper summary](https://blog.acolyer.org/2015/01/15/the-tail-at-scale/)
 
-**1.2 "We turned off garbage collection and got 10% more capacity" (Instagram)**
-- **Situation:** your Python web servers use more memory than they should, so each machine runs fewer processes.
-- **Real case:** Instagram disabled Python's garbage collector on its web fleet and reported ~10% more efficiency. The cause: worker processes share memory with their parent through copy-on-write, and the GC touching objects forced memory to be copied. Later they found fully disabling GC wasn't a great idea, and added `gc.freeze()` to Python so GC could be mostly turned back on.
-- **What you teach:** process forking, copy-on-write memory, how an "odd" fix comes from understanding the runtime.
-- **Twist:** the follow-up: why the first fix had to be reversed, and the better fix that went into Python itself.
-- **Read:** [Instagram: Dismissing Python Garbage Collection at Instagram](https://instagram-engineering.com/dismissing-python-garbage-collection-at-instagram-4dca40b29172) · [Instagram: Copy-on-write friendly Python garbage collection](https://instagram-engineering.com/copy-on-write-friendly-python-garbage-collection-ad6ed5233ddf) · [PyCon 2018 talk: disable and re-enable GC at Instagram](https://pycon-archive.python.org/2018/schedule/presentation/72/)
+**1.2 "The database is almost idle, but the API keeps timing out" (connection pool exhaustion)**
+- **Situation:** requests fail with "timeout waiting for a connection", yet the database CPU is low.
+- **Real cases:**
+  - **Layers:** a surge of background jobs took every connection in a pool shared by the web app and the workers, so web requests couldn't get one. Fix: separate connection pools (separate PgBouncers) for the app and the workers.
+  - **Decagon:** a few stuck connections quietly shrank the usable pool, so unrelated requests queued and then failed with pool exhaustion.
+- **What you teach:** what a connection pool is, why slow queries starve fast ones, isolating workloads (the bulkhead idea), what to monitor (waiting clients, not just database CPU).
+- **Twist:** "just make the pool bigger": why that can move the problem into the database instead of fixing it.
+- **Read:** [Layers: Using multiple PgBouncers to isolate application and worker connections](https://www.uselayers.com/articles/using-multiple-pgbouncers-to-isolate-application-and-worker-connections) · [Decagon: Debugging a latent PgBouncer bug across four layers](https://decagon.ai/blog/debugging-a-latent-pgbouncer-bug-across-four-layers)
 
-**1.3 "A popular cache key expires and the database melts" (Facebook memcache)**
+**1.3 "A popular cache key expires and the database melts" (caching: Facebook memcache, Shopify)**
 - **Situation:** a heavily read cache key is deleted or expires, and thousands of requests miss at once and hit the database (thundering herd). Also: a slow request writes old data into the cache after a newer one (stale set).
 - **Real case:** Facebook's memcache paper introduced **leases**: on a miss, the cache gives one client a token to fetch from the database; others wait or retry. Tokens are handed out at most once every 10 seconds per key, and a delete invalidates the lease so stale writes are rejected. One summary reports peak database queries dropping from 17K/s to 1.3K/s.
-- **What you teach:** cache-aside, thundering herd, stale sets, and how one small mechanism fixes both.
-- **Read:** "Scaling Memcache at Facebook" (NSDI 2013; search the title for the PDF) · [MIT 6.824 FAQ on the paper](https://pdos.csail.mit.edu/6.824/papers/memcache-faq.txt) · [Engineer's Codex summary](https://read.engineerscodex.com/p/how-facebook-scaled-memcached)
+- **Second real case:** Shopify's rewritten storefront uses layered caching (a local data cache on the same machine plus full-page caching in Redis) and reports average responses nearly 5× faster than before.
+- **What you teach:** cache-aside, cache layers, thundering herd, stale sets, and how one small mechanism (leases) fixes two problems.
+- **Read:** "Scaling Memcache at Facebook" (NSDI 2013; search the title for the PDF) · [MIT 6.824 FAQ on the paper](https://pdos.csail.mit.edu/6.824/papers/memcache-faq.txt) · [Engineer's Codex summary](https://read.engineerscodex.com/p/how-facebook-scaled-memcached) · [Shopify: Simplify, batch, and cache: storefront rendering](https://shopify.engineering/simplify-batch-cache-optimized-server-side-storefront-rendering)
 
 ## 2. Reliability and incidents
 
@@ -145,8 +245,8 @@ Many topics below, from database moves to API changes to language upgrades, reus
 - **What you teach:** web performance basics (bundle size, code splitting, caching), service workers, measuring performance as a business metric.
 - **Read:** [Pinterest: A one year PWA retrospective](https://medium.com/pinterest-engineering/a-one-year-pwa-retrospective-f4a2f4129e05) · Addy Osmani: "A Pinterest Progressive Web App Performance Case Study" (search the title) · [Pinterest: Driving user growth with performance improvements](https://medium.com/pinterest-engineering/driving-user-growth-with-performance-improvements-cfc50dafadd7)
 
-**5.3 "Upgrade the language inside an app running on millions of computers" (Dropbox Python 3)**
-- **Situation:** you can't redeploy software installed on users' machines, so a bad release can't simply be rolled back on a server.
+**5.3 "Ship a risky change to an app installed on millions of devices" (Dropbox desktop app)**
+- **Situation:** you can't redeploy software installed on users' machines, so a bad release can't simply be rolled back on a server. Applies to any mobile or desktop app. No Python knowledge needed; the change itself is just the example.
 - **Real case:** Dropbox moved its desktop app from Python 2 to 3, starting at a 2015 hack week. A system called **Hydra** let the app choose the Python 2 or 3 interpreter at startup, so users could be switched back quickly. It rolled out to internal users, then Beta, then everyone.
 - **What you teach:** client-side releases, staged rollouts to user groups, remote kill switches, an escape hatch (pattern 6).
 - **Read:** [Dropbox: How we rolled out one of the largest Python 3 migrations ever](https://dropbox.tech/application/how-we-rolled-out-one-of-the-largest-python-3-migrations-ever) · [Dropbox: Incrementally migrating over one million lines of code](https://dropbox.tech/application/incrementally-migrating-over-one-million-lines-of-code-from-python-2-to-python-3)
@@ -159,10 +259,10 @@ Many topics below, from database moves to API changes to language upgrades, reus
 - **What you teach:** queues, back-pressure, durability vs speed, adding a buffer without rewriting the system.
 - **Read:** [Slack: Scaling Slack's job queue](https://slack.engineering/scaling-slacks-job-queue/)
 
-**6.2 "Five million people connected at once" (Discord + Elixir)**
-- **Situation:** a real-time chat platform where some groups have tens of thousands of users online in the same room.
-- **Real case:** Discord built its real-time system on Elixir/Erlang VM. It reached nearly 5 million concurrent users; big servers (e.g. one with ~30,000 concurrent users) made processes fall behind on their message queues at peak, and bursts of reconnecting users were another problem. Later they used Rust (via Rustler) to scale further.
-- **What you teach:** fan-out of messages to many connections, actor/process model, handling reconnect storms.
+**6.2 "One chat room with 30,000 people online" (Discord)**
+- **Situation:** a real-time chat platform where one message must reach tens of thousands of connected users, and everyone reconnects at once after a blip. No Elixir knowledge needed; focus on the fan-out problem.
+- **Real case:** Discord reached nearly 5 million concurrent users. Big servers (e.g. one with ~30,000 concurrent users) made the parts handling them fall behind on their message queues at peak, and bursts of users reconnecting at the same moment were another problem.
+- **What you teach:** fan-out of one message to many connections, why one huge room is harder than many small ones, reconnect storms and how to spread them out (backoff with jitter).
 - **Read:** [Discord: How Discord scaled Elixir to 5,000,000 concurrent users](https://discord.com/blog/how-discord-scaled-elixir-to-5-000-000-concurrent-users) · [Elixir blog: Real-time communication at scale at Discord](https://elixir-lang.org/blog/2020/10/08/real-time-communication-at-scale-with-elixir-at-discord/)
 
 **6.3 "Two people edit the same design at the same time" (Figma multiplayer)**
@@ -193,8 +293,8 @@ Many topics below, from database moves to API changes to language upgrades, reus
 
 ## 8. Architecture
 
-**8.1 "Rewrite the backend in a new language, without a big-bang rewrite" (Khan Academy)**
-- **Situation:** your language version is dying (Python 2 end of life, Jan 2020), and you decide to move to new services.
+**8.1 "Replace an old system piece by piece, without a big-bang rewrite" (Khan Academy)**
+- **Situation:** an old system has to be replaced, but the product can't stop. The languages (Python → Go) are just the example; the method works for any rewrite.
 - **Real case:** Khan Academy's project "Goliath" moved a ~1M-line Python 2 monolith to Go services behind GraphQL. When Go could handle a request, the gateway called **both** Python and Go, compared results, logged differences and still returned Python's answer; then traffic moved to Go with Python as fallback; then Python was deleted. By August 2021 the new backend handled 95% of traffic. A talk reports ~3.5 years and ~40 person-years.
 - **What you teach:** patterns 3 and 5 together, the clearest real example of each.
 - **Read:** [Khan Academy: Go + Services = One Goliath Project](https://blog.khanacademy.org/go-services-one-goliath-project) · [Incremental rewrites with GraphQL](https://blog.khanacademy.org/incremental-rewrites-with-graphql) · [Beating the odds](https://blog.khanacademy.org/beating-the-odds-khan-academys-successful-monolith%e2%86%92services-rewrite) · [Pragmatic Engineer: Breaking up a monolith](https://newsletter.pragmaticengineer.com/p/real-world-eng-8)
@@ -212,14 +312,14 @@ Many topics below, from database moves to API changes to language upgrades, reus
 
 ## 9. Codebase and team
 
-**9.1 "Upgrade a framework three major versions behind, without stopping feature work" (GitHub Rails)**
-- **Situation:** you're stuck on an old framework version, and the business won't pause features.
+**9.1 "Upgrade a core dependency years out of date, without stopping feature work" (GitHub)**
+- **Situation:** you're stuck on an old version of your main framework or library, and the business won't pause features. GitHub's Rails upgrade is the example; no Rails knowledge needed.
 - **Real case:** GitHub took a year and a half to go from Rails 3.2 to 5.2. The key technique was **dual booting**: the app could run on either version and CI tested both. They shipped once production ran 30 minutes at peak traffic with no visible impact. Their own fork of Rails had made it harder.
 - **What you teach:** compatibility with both versions, small steps on the main branch, staying close to upstream.
 - **Read:** [GitHub: Upgrading GitHub from Rails 3.2 to 5.2](https://github.blog/engineering/upgrading-github-from-rails-3-2-to-5-2/)
 
-**9.2 "Big bang or step by step? Moving millions of lines to TypeScript" (Stripe vs Airbnb)**
-- **Situation:** a debate video. Your large JavaScript codebase needs a type system.
+**9.2 "Big bang or step by step? Changing millions of lines of code" (Stripe vs Airbnb)**
+- **Situation:** a debate video. A change must touch most of a huge codebase. Do it all at once, or gradually? The example is a TypeScript migration, but the question applies to any large codebase change.
 - **Real cases:** **Stripe** converted 3.7M+ lines from Flow to TypeScript **in a single pull request** (merged March 2022) using a codemod. **Airbnb** built **ts-migrate** to convert projects automatically, reporting 86% of a ~6M-line frontend converted.
 - **What you teach:** codemods, when big bang is *safer* than incremental, and what preparation makes it possible.
 - **Twist:** Pinterest also reported a 3.7M-line migration. Don't mix up the numbers.
@@ -298,7 +398,7 @@ Common tasks in normal jobs. No one big write-up, but the solution is standard a
 - **Papers:** classic industry papers (Facebook memcache, Google monorepo, Amazon Dynamo) are short enough for a 2-day prep and make strong videos.
 
 **Where to search by area**
-- **Performance:** Discord, Instagram, Netflix, Brendan Gregg's blog.
+- **Performance:** Shopify, Netflix, classic papers like "The Tail at Scale", Brendan Gregg's blog.
 - **Reliability:** Cloudflare blog (detailed postmortems), Slack Engineering, Google SRE book, Surfing Complexity (incident analysis).
 - **Frontend and mobile:** Airbnb, Pinterest, Shopify, web.dev case studies.
 - **Real-time:** Discord, Slack, Figma.
@@ -317,7 +417,7 @@ Common tasks in normal jobs. No one big write-up, but the solution is standard a
 
 ## Sources used for this list
 
-- **Performance:** [Discord: Go to Rust](https://discord.com/blog/why-discord-is-switching-from-go-to-rust) · [Instagram: dismissing Python GC](https://instagram-engineering.com/dismissing-python-garbage-collection-at-instagram-4dca40b29172) · [Instagram: copy-on-write friendly GC](https://instagram-engineering.com/copy-on-write-friendly-python-garbage-collection-ad6ed5233ddf) · [PyCon 2018 talk](https://pycon-archive.python.org/2018/schedule/presentation/72/) · [MIT 6.824 memcache FAQ](https://pdos.csail.mit.edu/6.824/papers/memcache-faq.txt) · [Engineer's Codex: Facebook memcached](https://read.engineerscodex.com/p/how-facebook-scaled-memcached)
+- **Performance:** [The Morning Paper: The Tail at Scale](https://blog.acolyer.org/2015/01/15/the-tail-at-scale/) · [Layers: multiple PgBouncers](https://www.uselayers.com/articles/using-multiple-pgbouncers-to-isolate-application-and-worker-connections) · [Decagon: latent PgBouncer bug](https://decagon.ai/blog/debugging-a-latent-pgbouncer-bug-across-four-layers) · [Shopify: storefront rendering](https://shopify.engineering/simplify-batch-cache-optimized-server-side-storefront-rendering) · [MIT 6.824 memcache FAQ](https://pdos.csail.mit.edu/6.824/papers/memcache-faq.txt) · [Engineer's Codex: Facebook memcached](https://read.engineerscodex.com/p/how-facebook-scaled-memcached)
 - **Reliability:** [InfoQ: Cloudflare WAF outage](https://www.infoq.com/news/2019/07/waf-causes-outage/) · [Surfing Complexity: Cloudflare](https://surfingcomplexity.blog/2019/08/02/contributors-mitigators-risks-cloudflare-2019-07-02-outage/) · [Slack: Jan 4 2021 outage](https://slack.engineering/slacks-outage-on-january-4th-2021/) · [The Register: Slack outage](https://www.theregister.com/2021/02/02/slack_outage_aws_autoscaling/) · [Surfing Complexity: Slack](https://surfingcomplexity.blog/2021/02/08/slacks-jan-2021-outage-a-tale-of-saturation/) · [Gremlin: origin of Chaos Monkey](https://gremlin.com/chaos-monkey/the-origin-of-chaos-monkey) · [IEEE Spectrum: chaos engineering](https://spectrum.ieee.org/chaos-engineering-saved-your-netflix)
 - **Infrastructure:** [DHH: cloud-exit savings](https://world.hey.com/dhh/our-cloud-exit-savings-will-now-top-ten-million-over-five-years-c7d9b5bd) · [The Register (2024)](https://www.theregister.com/2024/10/21/37signals_aws_savings) · [The Register (2025)](https://www.theregister.com/2025/05/09/37signals_cloud_repatriation_storage_savings) · [InfoQ: Dropbox off AWS](https://www.infoq.com/news/2016/03/Dropbox-AWS/) · [InfoQ podcast: Preslav Le](https://www.infoq.com/podcasts/preslav-le-dropbox)
 - **Security:** [GitHub: 2FA next steps](https://github.blog/news-insights/product-news/raising-the-bar-for-software-security-next-steps-for-github-com-2fa/) · [GitHub: securing millions of developers through 2FA](https://github.blog/security/supply-chain-security/securing-millions-of-developers-through-2fa/) · [Dropbox: password storage](https://dropbox.tech/security/how-dropbox-securely-stores-your-passwords)
